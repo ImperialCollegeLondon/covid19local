@@ -1,0 +1,2786 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+<title>COVID-19 - Lichfield</title>
+
+<meta property="og:title" content="COVID-19 - Lichfield" />
+
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
+
+<link rel="icon" href="../img/favicon.ico">
+
+
+<script type="text/javascript">
+window.FlexDashboardComponents = [];
+</script>
+
+<script id="flexdashboard-navbar" type="application/json">
+[{"title":"Map","href":"../#map","align":"left"},{"title":"Table","href":"../#table","align":"left"},{"title":"Details","href":"../#details","align":"left"},{"title":"Model","href":"../#model","align":"left"},{"title":"Imprint","href":"../#imprint","align":"left"}]
+</script>
+<script src="lib/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="lib/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="lib/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="lib/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="lib/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="lib/stickytableheaders-0.1.19/jquery.stickytableheaders.min.js"></script>
+<script src="lib/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<script src="lib/raphael-2.1.4/raphael-2.1.4.min.js"></script>
+<link href="lib/justgage-1.2.2.1/justgage.css" rel="stylesheet" />
+<script src="lib/justgage-1.2.2.1/justgage.js"></script>
+<script src="lib/gauge-binding-0.5.2/gauge.js"></script>
+<script src="lib/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="lib/typedarray-0.1/typedarray.min.js"></script>
+<link href="lib/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="lib/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="lib/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="lib/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<script src="lib/plotly-basic-1.52.2/plotly-basic-1.52.2.min.js"></script>
+<style type="text/css">
+
+/*
+ Dashboard CSS from Keen IO Dashboards
+ (https://github.com/keen/dashboards)
+*/
+
+body {
+  background: #f2f2f2;
+  padding: 60px 0 0 8px; /* padding-top overridden by theme */
+}
+
+body hr {
+  border-color: #d7d7d7;
+  margin: 10px 0;
+}
+
+.navbar-inverse .navbar-nav > li > a,
+.navbar .navbar-brand {
+  text-decoration: none;
+}
+
+.navbar-logo {
+  margin-top: 1px;
+}
+
+.navbar-logo img {
+  margin-right: 12px;
+}
+
+.navbar-author {
+  margin-left: 10px;
+  font-size: 15px;
+}
+
+.navbar .dropdown-menu .fa {
+  min-width: 20px;
+}
+
+.navbar .dropdown-menu {
+  min-width: 150px;
+  max-height: 500px;
+  overflow: auto;
+}
+
+.chart-wrapper,
+.nav-tabs-custom,
+.sbframe-commentary
+{
+  background: #fff;
+  border: 1px solid #e2e2e2;
+  border-radius: 3px;
+  margin-bottom: 8px;
+  margin-right: 8px;
+}
+
+.chart-title {
+  border-bottom: 1px solid #d7d7d7;
+  color: #666;
+  font-size: 14px;
+  font-weight: 300;
+  padding: 7px 10px 4px;
+}
+
+.chart-wrapper .chart-title:empty {
+  display: none;
+}
+
+.chart-wrapper .chart-stage {
+  overflow: hidden;
+  padding: 5px 10px;
+  position: relative;
+}
+
+.chart-wrapper .chart-notes {
+  background: #fbfbfb;
+  border-top: 1px solid #e2e2e2;
+  color: #808080;
+  font-size: 12px;
+  padding: 8px 10px 5px;
+}
+
+/*
+ CSS for handling flexbox layout
+*/
+
+#dashboard-container {
+  visibility: hidden;
+}
+
+.tab-content>.dashboard-page-wrapper.active {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.dashboard-page-wrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.dashboard-row-orientation {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.dashboard-row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.dashboard-row-flex {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.dashboard-column-orientation {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.dashboard-column {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.chart-wrapper-flex {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.chart-stage-flex {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  position: relative;
+}
+
+.chart-shim {
+  position: absolute;
+  left: 8px; top: 8px; right: 8px; bottom: 8px;
+}
+
+.no-padding .chart-shim {
+  left: 0; top: 0; right: 0; bottom: 0;
+}
+
+.flowing-content-shim {
+  overflow: auto;
+  left: 0; top: 0; right: 0; bottom: 0;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.flowing-content-container {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.chart-stage .table-bordered {
+  border: none;
+}
+
+.chart-stage .table-bordered > tbody > tr > th,
+.chart-stage .table-bordered > tfoot > tr > th,
+.chart-stage .table-bordered > tbody > tr > td,
+.chart-stage .table-bordered > tfoot > tr > td {
+  border: none;
+}
+
+.chart-stage .table-bordered > tbody > tr > td {
+  border-top: 1px solid #dddddd;
+}
+
+.chart-stage .table-bordered > thead > tr > th {
+  border: none;
+  border-bottom: 2px solid #dddddd;
+}
+
+.bootstrap-table table>thead {
+  background-color: #fff;
+}
+
+.bootstrap-table table.data,
+.bootstrap-table table.shiny-table {
+  width: inherit !important;
+}
+
+.bootstrap-table table.data>tbody>tr>th,
+.bootstrap-table table.shiny-table>tbody>tr>th {
+  border-top: none;
+  border-bottom: 2px solid #dddddd;
+  padding: 5px;
+}
+
+.bootstrap-table .data td[align=right] {
+  font-family: inherit;
+}
+
+.chart-wrapper form {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.shiny-input-container label {
+  font-weight: normal;
+}
+
+.chart-stage .html-widget {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.chart-stage .html-widget-static-bound {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.chart-stage .shiny-bound-output {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Omit display of empty paragraphs */
+
+.chart-shim>p:empty {
+  display: none;
+}
+
+.chart-stage>p:empty {
+  display: none;
+}
+
+/* Omit display of special knitr options div*/
+
+.chart-stage .knitr-options {
+  display: none;
+}
+
+/* Automatically resizing images */
+
+.image-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+}
+
+.image-container img {
+  opacity: 0;
+  overflow: hidden;
+}
+
+/* Value box */
+
+.value-box {
+  border-radius: 2px;
+  position: relative;
+  display: block;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.value-box > .inner {
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.value-box .value {
+  font-size: 38px;
+  font-weight: bold;
+  margin: 0 0 3px 0;
+  white-space: nowrap;
+  padding: 0;
+}
+
+.value-box .caption {
+  font-size: 15px;
+}
+.value-box .caption > small {
+  display: block;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.value-box .icon i {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 80px;
+  color: rgba(0, 0, 0, 0.15);
+}
+
+.linked-value:hover {
+  cursor: pointer;
+}
+
+.value-box.linked-value:hover {
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* STORYBOARD */
+
+.storyboard-nav button {
+  background: transparent;
+  border: 0;
+  opacity: .3;
+  outline: none;
+  padding: 0;
+}
+
+.storyboard-nav button:hover,
+.storyboard-nav button:hover {
+  opacity: .5;
+}
+
+.storyboard-nav button:disabled,
+.storyboard-nav button:disabled {
+  opacity: .1;
+}
+
+.storyboard-nav .sbnext,
+.storyboard-nav .sbprev {
+  float: left;
+  width: 2%;
+  height: 120px;
+  font-size: 50px;
+}
+
+.storyboard-nav .sbprev {
+  text-align: left;
+  width: 2%;
+}
+
+.storyboard-nav .sbnext {
+  float: right;
+  text-align: right;
+  margin-right: 8px;
+}
+
+.storyboard-nav .sbframelist {
+  margin: 0 auto;
+  width: 94%;
+  height: 120px;
+  overflow: hidden;
+  text-shadow: none;
+  margin-bottom: 8px;
+}
+
+.storyboard-nav .sbframelist ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.storyboard-nav .sbframelist ul li {
+  float: left;
+  width: 270px;
+  height: 100%;
+  padding: 10px 10px 10px 10px;
+  margin-right: 8px;
+  background: #fff;
+  border: 1px solid #e2e2e2;
+  border-radius: 3px;
+  color: #3a3c47;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.storyboard-nav .sbframelist ul li:last-child {
+  margin-right: 0px;
+}
+
+.storyboard-nav .sbframelist ul li.active {
+  color: #fff;
+  background: #B8B8B8;
+}
+
+.sbframe-commentary {
+  width: 300px;
+  background: #fbfbfb;
+  font-size: 14px;
+}
+
+.sbframe-commentary ul {
+  padding-left: 22px;
+}
+
+.sbframe.active {
+  display: flex;
+}
+
+.sbframe:not(.active) {
+  display: none;
+}
+
+/* NAV TABS */
+
+.nav-tabs-custom > .nav-tabs {
+  margin: 0;
+  border-bottom: 1px solid #d7d7d7;
+  color: #666;
+  font-size: 14px;
+  font-weight: 300;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+.nav-tabs-custom > .nav-tabs > li {
+  border-top: 3px solid transparent;
+  margin-bottom: -1px;
+  margin-right: 5px;
+}
+.nav-tabs-custom > .nav-tabs > li > a,
+.nav-tabs-custom > .nav-tabs > li > a:active {
+  color: #666;
+  font-weight: 300;
+  font-size: 14px;
+  border-radius: 0;
+  padding: 3px 10px 5px;
+  text-transform: none;
+}
+
+.nav-tabs-custom > .nav-tabs > li:not(.active) > a {
+  border-bottom-color: transparent;
+}
+
+.nav-tabs-custom > .nav-tabs > li > a.text-muted {
+  color: #999;
+}
+.nav-tabs-custom > .nav-tabs > li > a,
+.nav-tabs-custom > .nav-tabs > li > a:hover {
+  background: transparent;
+  margin: 0;
+}
+.nav-tabs-custom > .nav-tabs > li > a:hover {
+  color: #999;
+}
+.nav-tabs-custom > .nav-tabs > li:not(.active) > a:hover,
+.nav-tabs-custom > .nav-tabs > li:not(.active) > a:focus,
+.nav-tabs-custom > .nav-tabs > li:not(.active) > a:active {
+  border-color: transparent;
+}
+.nav-tabs-custom > .nav-tabs > li.active {
+  border-top-color: #3c8dbc;
+}
+.nav-tabs-custom > .nav-tabs > li.active > a,
+.nav-tabs-custom > .nav-tabs > li.active:hover > a {
+  background-color: #fff;
+  color: #666;
+}
+.nav-tabs-custom > .nav-tabs > li.active > a {
+  border-top-color: transparent;
+  border-left-color: #d7d7d7;
+  border-right-color: #d7d7d7;
+}
+.nav-tabs-custom > .nav-tabs > li:first-of-type {
+  margin-left: 0;
+}
+.nav-tabs-custom > .nav-tabs > li:first-of-type.active > a {
+  border-left-color: transparent;
+}
+.nav-tabs-custom > .nav-tabs.pull-right {
+  float: none !important;
+}
+.nav-tabs-custom > .nav-tabs.pull-right > li {
+  float: right;
+}
+.nav-tabs-custom > .nav-tabs.pull-right > li:first-of-type {
+  margin-right: 0;
+}
+.nav-tabs-custom > .nav-tabs.pull-right > li:first-of-type > a {
+  border-left-width: 1px;
+}
+.nav-tabs-custom > .nav-tabs.pull-right > li:first-of-type.active > a {
+  border-left-color: #d7d7d7;
+  border-right-color: transparent;
+}
+.nav-tabs-custom > .nav-tabs > li.header {
+  line-height: 35px;
+  padding: 0 10px;
+  font-size: 20px;
+  color: #666;
+}
+.nav-tabs-custom > .nav-tabs > li.header > .fa,
+.nav-tabs-custom > .nav-tabs > li.header > .glyphicon,
+.nav-tabs-custom > .nav-tabs > li.header > .ion {
+  margin-right: 5px;
+}
+.nav-tabs-custom > .tab-content {
+  background: #fff;
+  padding: 0;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.nav-tabs-custom > .tab-content > .chart-wrapper {
+  background: #fff;
+  border: none;
+  margin: 0;
+}
+
+
+.nav-tabs-custom > .tab-content > .active {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.nav-tabs-custom .dropdown.open > a:active,
+.nav-tabs-custom .dropdown.open > a:focus {
+  background: transparent;
+  color: #999;
+}
+
+
+@media (max-width: 767px) {
+  .value-box {
+    text-align: center;
+    margin-right: 8px;
+  }
+  .value-box .icon {
+    display: none;
+  }
+}
+
+/* Fixed position sidebar */
+
+.section.sidebar {
+  position: fixed;
+  top: 51px; /* overridden by theme */
+  left: 0;
+  bottom: 0;
+  border-right: 1px solid #e2e2e2;
+  background-color: white; /* overridden by theme */
+  padding-left: 10px;
+  padding-right: 10px;
+  visibility: hidden;
+  overflow: auto;
+}
+
+.section.sidebar form p:first-child {
+  margin-top: 10px;
+}
+
+/* Embedded source code */
+
+#flexdashboard-source-code {
+  display: none;
+}
+
+.featherlight-content #flexdashboard-source-code {
+  display: inline-block;
+}
+
+.featherlight-content {
+  width: 80%;
+  max-width: 800px;
+  padding: 0 !important;
+  border-bottom: none !important;
+}
+
+.featherlight:last-of-type {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.featherlight-inner {
+  width: 100%;
+}
+
+.featherlight-content pre {
+  margin: 0;
+  border: 0;
+  background: #fff;
+  font-size: 12px;
+}
+
+.unselectable {
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: -moz-none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+#flexdashboard-source-code code {
+  -ms-user-select: text;
+  -webkit-user-select: text;
+  -khtml-user-select: text;
+  -moz-user-select: text;
+  -o-user-select: text;
+  user-select: text;
+}
+
+/* DataTables Tweaks */
+
+.dataTables_filter input[type="search"] {
+  -webkit-appearance: searchfield;
+  outline: none;
+}
+
+.dataTables_wrapper.no-footer
+.dataTables_info {
+  padding-top: 0;
+}
+
+
+table.dataTable thead th {
+  border-bottom: 1px solid #d7d7d7;
+}
+
+.dataTables_wrapper.no-footer .dataTables_scrollBody {
+  border-bottom: 1px solid #d7d7d7;
+}
+
+/* Mobile phone only CSS */
+
+.desktop-layout div.section.mobile {
+  display: none;
+}
+
+.mobile-layout div.section.no-mobile {
+  display: none;
+}
+
+.mobile-figure {
+  display: none;
+}
+
+
+
+body {
+  padding-top: 60px;
+}
+
+.section.sidebar {
+  top: 51px;
+  background-color: rgba(39, 128, 227, 0.1);
+}
+
+.value-box {
+  color: #f9f9f9;
+}
+
+.bg-primary {
+  background-color: rgba(39, 128, 227, 0.7);
+}
+
+.storyboard-nav .sbframelist ul li.active {
+  background-color: rgba(39, 128, 227, 0.7);
+}
+
+.nav-tabs-custom > .nav-tabs > li.active {
+  border-top-color: rgba(39, 128, 227, 0.7);
+}
+
+.bg-info {
+  background-color: rgba(153, 84, 187, 0.7);
+}
+
+.bg-warning {
+  background-color: rgba(255, 117, 24, 0.7);
+}
+
+.bg-danger {
+  background-color: rgba(255, 0, 57, 0.7);
+}
+
+.bg-success {
+  background-color: rgba(63, 182, 24, 0.7);
+}
+
+.chart-title {
+  font-weight: 500;
+}
+
+.nav-tabs-custom > .nav-tabs > li > a,
+.nav-tabs-custom > .nav-tabs > li > a:active {
+  font-weight: 500;
+}
+
+</style>
+
+
+<link rel="stylesheet" href="../css/LTLA.css" type="text/css" />
+<link rel="stylesheet" href="../css/navbar.css" type="text/css" />
+<link rel="stylesheet" href="../css/ltla_search.css" type="text/css" />
+
+</head>
+
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<div class="container-fluid">
+<div class="navbar-header">
+
+<button id="navbar-button" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+
+<span class="navbar-logo pull-left">
+  <img src="../img/logo.jpg" class="navbar-logo"/>
+</span>
+<span class="navbar-brand">
+  COVID-19 - Lichfield
+  <span class="navbar-author">
+        </span>
+</span>
+
+</div>
+<div id="navbar" class="navbar-collapse collapse">
+<ul class="nav navbar-nav navbar-left">
+</ul>
+<ul class="nav navbar-nav navbar-right">
+</ul>
+</div><!--/.nav-collapse-->
+</div><!--/.container-->
+</div><!--/.navbar-->
+
+<script type="text/javascript">
+
+
+var FlexDashboard = (function () {
+
+  // initialize options
+  var _options = {};
+
+  var FlexDashboard = function() {
+
+    // default options
+    _options = $.extend(_options, {
+      theme: "cosmo",
+      fillPage: false,
+      orientation: 'columns',
+      storyboard: false,
+      defaultFigWidth: 576,
+      defaultFigHeight: 461,
+      defaultFigWidthMobile: 360,
+      defaultFigHeightMobile: 461,
+      isMobile: false,
+      isPortrait: false,
+      resize_reload: true
+    });
+  };
+
+  function init(options) {
+
+    // extend default options
+    $.extend(true, _options, options);
+
+    // add ids to sections that don't have them (pandoc won't assign ids
+    // to e.g. sections with titles consisting of only chinese characters)
+    var nextId = 1;
+    $('.level1:not([id]),.level2:not([id]),.level3:not([id])').each(function() {
+      $(this).attr('id', 'dashboard-' + nextId++);
+    });
+
+    // find navbar items
+    var navbarItems = $('#flexdashboard-navbar');
+    if (navbarItems.length)
+      navbarItems = JSON.parse(navbarItems.html());
+    addNavbarItems(navbarItems);
+
+    // find the main dashboard container
+    var dashboardContainer = $('#dashboard-container');
+
+    // resolve mobile classes
+    resolveMobileClasses(dashboardContainer);
+
+    // one time global initialization for components
+    componentsInit(dashboardContainer);
+
+    // look for a global sidebar
+    var globalSidebar = dashboardContainer.find(".section.level1.sidebar");
+    if (globalSidebar.length > 0) {
+
+      // global layout for fullscreen displays
+      if (!isMobilePhone()) {
+
+         // hoist it up to the top level
+         globalSidebar.insertBefore(dashboardContainer);
+
+         // lay it out (set width/positions)
+         layoutSidebar(globalSidebar, dashboardContainer);
+
+      // tuck sidebar into first page for mobile phones
+      } else {
+
+        // convert it into a level3 section
+        globalSidebar.removeClass('sidebar');
+        globalSidebar.removeClass('level1');
+        globalSidebar.addClass('level3');
+        var h1 = globalSidebar.children('h1');
+        var h3 = $('<h3></h3>');
+        h3.append(h1.contents());
+        h3.insertBefore(h1);
+        h1.detach();
+
+        // move it into the first page
+        var page = dashboardContainer.find('.section.level1').first();
+        if (page.length > 0)
+          page.prepend(globalSidebar);
+      }
+    }
+
+    // look for pages to layout
+    var pages = $('div.section.level1');
+    if (pages.length > 0) {
+
+        // find the navbar and collapse on clicked
+        var navbar = $('#navbar');
+        navbar.on("click", "a[data-toggle!=dropdown]", null, function () {
+           navbar.collapse('hide');
+        });
+
+        // envelop the dashboard container in a tab content div
+        dashboardContainer.wrapInner('<div class="tab-content"></div>');
+
+        pages.each(function(index) {
+
+          // lay it out
+          layoutDashboardPage($(this));
+
+          // add it to the navbar
+          addToNavbar($(this), index === 0);
+
+        });
+
+    } else {
+
+      // remove the navbar and navbar button if we don't
+      // have any navbuttons
+      if (navbarItems.length === 0) {
+        $('#navbar').remove();
+        $('#navbar-button').remove();
+      }
+
+      // add the storyboard class if requested
+      if (_options.storyboard)
+        dashboardContainer.addClass('storyboard');
+
+      // layout the entire page
+      layoutDashboardPage(dashboardContainer);
+    }
+
+    // if we are in shiny we need to trigger a window resize event to
+    // force correct layout of shiny-bound-output elements
+    if (isShinyDoc())
+      $(window).trigger('resize');
+
+    // make main components visible
+    $('.section.sidebar').css('visibility', 'visible');
+    dashboardContainer.css('visibility', 'visible');
+
+    // handle location hash
+    handleLocationHash();
+
+    // intialize prism highlighting
+    initPrismHighlighting();
+
+    // record mobile and orientation state then register a handler
+    // to refresh if resize_reload is set to true and it changes
+    _options.isMobile = isMobilePhone();
+    _options.isPortrait = isPortrait();
+    if (_options.resize_reload) {
+      $(window).on('resize', function() {
+        if (_options.isMobile !== isMobilePhone() ||
+            _options.isPortrait !== isPortrait()) {
+          window.location.reload();
+        }
+      });
+    } else {
+      // if in desktop mode and resizing to mobile, make sure the heights are 100%
+      // This enforces what `fillpage.css` does for "wider" pages.
+      // Since we are not reloading once the page becomes small, we need to force the height to 100%
+      // This is a new situation introduced when `_options.resize_reload` is `false`
+      if (! _options.isMobile) {
+        // only add if `fillpage.css` was added in the first place
+        if (_options.fillPage) {
+          // fillpage.css
+          $("html,body,#dashboard").css("height", "100%");
+        }
+      }
+    }
+    // trigger layoutcomplete event
+    dashboardContainer.trigger('flexdashboard:layoutcomplete');
+  }
+
+  function resolveMobileClasses(dashboardContainer) {
+     // add top level layout class
+    dashboardContainer.addClass(isMobilePhone() ? 'mobile-layout' :
+                                                  'desktop-layout');
+
+    // look for .mobile sections and add .no-mobile to their peers
+    var mobileSections = $('.section.mobile');
+    mobileSections.each(function() {
+       var id = $(this).attr('id');
+       var nomobileId = id.replace(/-\d+$/, '');
+       $('#' + nomobileId).addClass('no-mobile');
+    });
+  }
+
+  function addNavbarItems(navbarItems) {
+
+    var navbarLeft = $('ul.navbar-left');
+    var navbarRight = $('ul.navbar-right');
+
+    for (var i = 0; i<navbarItems.length; i++) {
+
+      // get the item
+      var item = navbarItems[i];
+
+      // determine the container
+      var container = null;
+      if (item.align === "left")
+        container = navbarLeft;
+      else
+        container = navbarRight;
+
+      // navbar menu if we have multiple items
+      if (item.items) {
+        var menu = navbarMenu(null, item.icon, item.title, container);
+        for (var j = 0; j<item.items.length; j++) {
+          var subItem = item.items[j];
+          var li = $('<li></li>');
+          li.append(navbarLink(subItem.icon, subItem.title, subItem.href, subItem.target));
+          menu.append(li);
+        }
+      } else {
+        var li = $('<li></li>');
+        li.append(navbarLink(item.icon, item.title, item.href, item.target));
+        container.append(li);
+      }
+    }
+  }
+
+  // create or get a reference to an existing dropdown menu
+  function navbarMenu(id, icon, title, container) {
+    var existingMenu = [];
+    if (id)
+      existingMenu = container.children('#' + id);
+    if (existingMenu.length > 0) {
+      return existingMenu.children('ul');
+    } else {
+      var li = $('<li></li>');
+      if (id)
+        li.attr('id', id);
+      li.addClass('dropdown');
+      // auto add "Share" title on mobile if necessary
+      if (!title && icon && (icon === "fa-share-alt") && isMobilePhone())
+        title = "Share";
+      if (title) {
+        title = title + ' <span class="caret"></span>';
+      }
+      var a = navbarLink(icon, title, "#");
+      a.addClass('dropdown-toggle');
+      a.attr('data-toggle', 'dropdown');
+      a.attr('role', 'button');
+      a.attr('aria-expanded', 'false');
+      li.append(a);
+      var ul = $('<ul class="dropdown-menu"></ul>');
+      ul.attr('role', 'menu');
+      li.append(ul);
+      container.append(li);
+      return ul;
+    }
+  }
+
+  function addToNavbar(page, active) {
+
+    // capture the id and data-icon attribute (if any)
+    var id = page.attr('id');
+    var icon = page.attr('data-icon');
+    var navmenu = page.attr('data-navmenu');
+
+    // get hidden state (transfer this to navbar)
+    var hidden = page.hasClass('hidden');
+    page.removeClass('hidden');
+
+    // sanitize the id for use with bootstrap tabs
+    id = id.replace(/[.\/?&!#<>]/g, '').replace(/\s/g, '_');
+    page.attr('id', id);
+
+    // get the wrapper
+    var wrapper = page.closest('.dashboard-page-wrapper');
+
+    // move the id to the wrapper
+    page.removeAttr('id');
+    wrapper.attr('id', id);
+
+    // add the tab-pane class to the wrapper
+    wrapper.addClass('tab-pane');
+    if (active)
+      wrapper.addClass('active');
+
+    // get a reference to the h1, discover its inner contens, then detach it
+    var h1 = wrapper.find('h1').first();
+    var title = h1.contents();
+    h1.detach();
+
+    // create a navbar item
+    var li = $('<li></li>');
+    var a = navbarLink(icon, title, '#' + id);
+    a.attr('data-toggle', 'tab');
+    li.append(a);
+
+    // add it to the navbar (or navbar menu if specified)
+    var container = $('ul.navbar-left');
+    if (navmenu) {
+      var menuId = navmenu.replace(/\s+/g, '');
+      var menu = navbarMenu(menuId, null, navmenu, container);
+      menu.append(li);
+    } else {
+      container.append(li);
+    }
+
+    // hide it if requested
+    if (hidden)
+      li.addClass('hidden');
+  }
+
+  function navbarLink(icon, title, href, target) {
+
+    var a = $('<a></a>');
+    if (icon) {
+
+      // get the name of the icon set and icon
+      var dashPos = icon.indexOf("-");
+      var iconSet = null;
+      var iconSplit = icon.split(" ");
+      if (iconSplit.length > 1) {
+        iconSet = iconSplit[0];
+        icon = iconSplit.slice(1).join(" ");
+      } else {
+        iconSet = icon.substring(0, dashPos);
+      }
+      var iconName = icon.substring(dashPos + 1);
+
+      // create the icon
+      var iconElement = $('<span class="' + iconSet + ' ' + icon + '"></span>');
+      if (title)
+        iconElement.css('margin-right', '7px');
+      a.append(iconElement);
+      // if href is null see if we can auto-generate based on icon (e.g. social)
+      if (!href)
+        maybeGenerateLinkFromIcon(iconName, a);
+    }
+    if (title)
+      a.append(title);
+
+    // add the href.
+    if (href) {
+      if (href === "source_embed") {
+        a.attr('href', '#');
+        a.attr('data-featherlight', "#flexdashboard-source-code");
+        a.featherlight({
+            beforeOpen: function(event){
+              $('body').addClass('unselectable');
+            },
+            afterClose: function(event){
+              $('body').removeClass('unselectable');
+            }
+        });
+      } else {
+        a.attr('href', href);
+      }
+    }
+
+    // add the arget
+    if (target)
+      a.attr('target', target);
+
+    return a;
+  }
+
+  // auto generate a link from an icon name (e.g. twitter) when possible
+  function maybeGenerateLinkFromIcon(iconName, a) {
+
+     var serviceLinks = {
+      "twitter": "https://twitter.com/share?text=" + encodeURIComponent(document.title) + "&url="+encodeURIComponent(location.href),
+      "facebook": "https://www.facebook.com/sharer/sharer.php?s=100&p[url]="+encodeURIComponent(location.href),
+      "google-plus": "https://plus.google.com/share?url="+encodeURIComponent(location.href),
+      "linkedin": "https://www.linkedin.com/shareArticle?mini=true&url="+encodeURIComponent(location.href) + "&title=" + encodeURIComponent(document.title),
+      "pinterest": "https://pinterest.com/pin/create/link/?url="+encodeURIComponent(location.href) + "&description=" + encodeURIComponent(document.title)
+    };
+
+    var makeSocialLink = function(a, href) {
+      a.attr('href', '#');
+      a.on('click', function(e) {
+        e.preventDefault();
+        window.open(href);
+      });
+    };
+
+    $.each(serviceLinks, function(key, value) {
+      if (iconName.indexOf(key) !== -1)
+        makeSocialLink(a, value);
+    });
+  }
+
+  // layout a dashboard page
+  function layoutDashboardPage(page) {
+
+    // use a page wrapper so that free form content above the
+    // dashboard appears at the top rather than the side (as it
+    // would without the wrapper in a column orientation)
+    var wrapper = $('<div class="dashboard-page-wrapper"></div>');
+    page.wrap(wrapper);
+
+    // if there are no level2 or level3 headers synthesize a level3
+    // header to contain the (e.g. frame it, scroll container, etc.)
+    var headers = page.find('h2,h3');
+    if (headers.length === 0)
+      page.wrapInner('<div class="section level3"></div>');
+
+    // hoist up any content before level 2 or level 3 headers
+    var children = page.children();
+    children.each(function(index) {
+      if ($(this).hasClass('level2') || $(this).hasClass('level3'))
+        return false;
+      $(this).insertBefore(page);
+    });
+
+    // determine orientation and fillPage behavior for distinct media
+    var orientation, fillPage, storyboard;
+
+    // media: mobile phone
+    if (isMobilePhone()) {
+
+      // if there is a sidebar we need to ensure it's content
+      // is properly framed as an h3
+      var sidebar = page.find('.section.sidebar');
+      sidebar.removeClass('sidebar');
+      sidebar.wrapInner('<div class="section level3"></div>');
+      var h2 = sidebar.find('h2');
+      var h3 = $('<h3></h3>');
+      h3.append(h2.contents());
+      h3.insertBefore(h2);
+      h2.detach();
+
+      // wipeout h2 elements then enclose them in a single h2
+      var level2 = page.find('div.section.level2');
+      level2.each(function() {
+        level2.children('h2').remove();
+        level2.children().unwrap();
+      });
+      page.wrapInner('<div class="section level2"></div>');
+
+      // substitute mobile images
+      if (isPortrait()) {
+        var mobileFigures = $('img.mobile-figure');
+        mobileFigures.each(function() {
+          // get the src (might be base64 encoded)
+          var src = $(this).attr('src');
+
+          // find it's peer
+          var id = $(this).attr('data-mobile-figure-id');
+          var img = $('img[data-figure-id=' + id + "]");
+          img.attr('src', src)
+             .attr('width', _options.defaultFigWidthMobile)
+             .attr('height', _options.defaultFigHeightMobile);
+        });
+      }
+
+      // hoist storyboard commentary into it's own section
+      if (page.hasClass('storyboard')) {
+        var commentaryHR = page.find('div.section.level3 hr');
+        commentaryHR.each(function() {
+          var commentary = $(this).nextAll().detach();
+          var commentarySection = $('<div class="section level3"></div>');
+          commentarySection.append(commentary);
+          commentarySection.insertAfter($(this).closest('div.section.level3'));
+          $(this).remove();
+        });
+      }
+
+      // force a non full screen layout by columns
+      orientation = _options.orientation = 'columns';
+      fillPage = _options.fillPage = false;
+      storyboard = _options.storyboard = false;
+
+    // media: desktop
+    } else {
+
+      // determine orientation
+      orientation = page.attr('data-orientation');
+      if (orientation !== 'rows' && orientation != 'columns')
+        orientation = _options.orientation;
+
+      // determine storyboard mode
+      storyboard = page.hasClass('storyboard');
+
+      // fillPage based on options (force for storyboard)
+      fillPage = _options.fillPage || storyboard;
+
+      // handle sidebar
+      var sidebar = page.find('.section.level2.sidebar');
+      if (sidebar.length > 0)
+        layoutSidebar(sidebar, page);
+    }
+
+    // give it and it's parent divs height: 100% if we are in fillPage mode
+    if (fillPage) {
+      page.addClass('vertical-layout-fill');
+      page.css('height', '100%');
+      page.parents('div').css('height', '100%');
+    } else {
+      page.addClass('vertical-layout-scroll');
+    }
+
+    // perform the layout
+    if (storyboard)
+      layoutPageAsStoryboard(page);
+    else if (orientation === 'rows')
+      layoutPageByRows(page, fillPage);
+    else if (orientation === 'columns')
+      layoutPageByColumns(page, fillPage);
+  }
+
+  function layoutSidebar(sidebar, content) {
+
+    // get it out of the header hierarchy
+    sidebar = sidebar.first();
+    if (sidebar.hasClass('level1')) {
+      sidebar.removeClass('level1');
+      sidebar.children('h1').remove();
+    } else if (sidebar.hasClass('level2')) {
+      sidebar.removeClass('level2');
+      sidebar.children('h2').remove();
+    }
+
+    // determine width
+    var sidebarWidth = isTablet() ? 220 : 250;
+    var dataWidth = parseInt(sidebar.attr('data-width'));
+    if (dataWidth)
+      sidebarWidth = dataWidth;
+
+    // set the width and shift the page right to accomodate the sidebar
+    sidebar.css('width', sidebarWidth + 'px');
+    content.css('padding-left', sidebarWidth + 'px');
+
+    // wrap it's contents in a form
+    sidebar.wrapInner($('<form></form>'));
+  }
+
+  function layoutPageAsStoryboard(page) {
+
+    // create storyboard navigation
+    var nav = $('<div class="storyboard-nav"></div>');
+
+    // add navigation buttons
+    var prev = $('<button class="sbprev"><i class="fa fa-angle-left"></i></button>');
+    nav.append(prev);
+    var next= $('<button class="sbnext"><i class="fa fa-angle-right"></i></button>');
+    nav.append(next);
+
+    // add navigation frame
+    var frameList = $('<div class="sbframelist"></div>');
+    nav.append(frameList);
+    var ul = $('<ul></ul>');
+    frameList.append(ul);
+
+     // find all the level3 sections (those are the storyboard frames)
+    var frames = page.find('div.section.level3');
+    frames.each(function() {
+
+      // mark it
+      $(this).addClass('sbframe');
+
+      // divide it into chart content and (optional) commentary
+      $(this).addClass('dashboard-column-orientation');
+
+      // stuff the chart into it's own div w/ flex
+      $(this).wrapInner('<div class="sbframe-component"></div>');
+      setFlex($(this), 1);
+      var frame = $(this).children('.sbframe-component');
+
+      // extract the title from the h3
+      var li = $('<li></li>');
+      var h3 = frame.children('h3');
+      li.append(h3.contents());
+      h3.detach();
+      ul.append(li);
+
+      // extract commentary
+      var hr = frame.children('hr');
+      if (hr.length) {
+        var commentary = hr.nextAll().detach();
+        hr.remove();
+        var commentaryFrame = $('<div class="sbframe-commentary"></div>');
+        commentaryFrame.addClass('flowing-content-shim');
+        commentaryFrame.addClass('flowing-content-container');
+        commentaryFrame.append(commentary);
+        $(this).append(commentaryFrame);
+
+        // look for a data-commentary-width attribute
+        var commentaryWidth = $(this).attr('data-commentary-width');
+        if (commentaryWidth)
+          commentaryFrame.css('width', commentaryWidth + 'px');
+      }
+
+      // layout the chart (force flex)
+      var result = layoutChart(frame, true);
+
+      // ice the notes if there are none
+      if (!result.notes)
+        frame.find('.chart-notes').remove();
+
+      // set flex on chart
+      setFlex(frame, 1);
+    });
+
+    // create a div to hold all the frames
+    var frameContent = $('<div class="sbframe-content"></div>');
+    frameContent.addClass('dashboard-row-orientation');
+    frameContent.append(frames.detach());
+
+    // row orientation to stack nav and frame content
+    page.addClass('dashboard-row-orientation');
+    page.append(nav);
+    page.append(frameContent);
+    setFlex(frameContent, 1);
+
+    // initialize sly
+    var sly = new Sly(frameList, {
+    		horizontal: true,
+    		itemNav: 'basic',
+    		smart: true,
+    		activateOn: 'click',
+    		startAt: 0,
+    		scrollBy: 1,
+    		activatePageOn: 'click',
+    		speed: 200,
+    		moveBy: 600,
+    		dragHandle: true,
+    		dynamicHandle: true,
+    		clickBar: true,
+    		keyboardNavBy: 'items',
+    		next: next,
+    		prev: prev
+    	}).init();
+
+    // make first frame active
+    frames.removeClass('active');
+    frames.first().addClass('active');
+
+    // subscribe to frame changed events
+    sly.on('active', function (eventName, itemIndex) {
+      frames.removeClass('active');
+      frames.eq(itemIndex).addClass('active')
+                          .trigger('shown');
+    });
+  }
+
+  function layoutPageByRows(page, fillPage) {
+
+    // row orientation
+    page.addClass('dashboard-row-orientation');
+
+    // find all the level2 sections (those are the rows)
+    var rows = page.find('div.section.level2');
+
+    // if there are no level2 sections then treat the
+    // entire page as if it's a level 2 section
+    if (rows.length === 0) {
+      page.wrapInner('<div class="section level2"></div>');
+      rows = page.find('div.section.level2');
+    }
+
+    rows.each(function () {
+
+      // flags
+      var haveNotes = false;
+      var haveFlexHeight = true;
+
+      // remove the h2
+      $(this).children('h2').remove();
+
+      // check for a tabset
+      var isTabset = $(this).hasClass('tabset');
+      if (isTabset)
+        layoutTabset($(this));
+
+      // give it row layout semantics if it's not a tabset
+      if (!isTabset)
+        $(this).addClass('dashboard-row');
+
+      // find all of the level 3 subheads
+      var columns = $(this).find('div.section.level3');
+
+      // determine figureSizes sizes
+      var figureSizes = chartFigureSizes(columns);
+
+      // fixup the columns
+      columns.each(function(index) {
+
+        // layout the chart (force flex if we are in a tabset)
+        var result = layoutChart($(this), isTabset);
+
+        // update flexHeight state
+        if (!result.flex)
+          haveFlexHeight = false;
+
+        // update state
+        if (result.notes)
+          haveNotes = true;
+
+        // set the column flex based on the figure width
+        // (value boxes will just get the default figure width)
+        var chartWidth = figureSizes[index].width;
+        setFlex($(this), chartWidth + ' ' + chartWidth + ' 0px');
+
+      });
+
+      // remove empty chart note divs
+      if (isTabset)
+        $(this).find('.chart-notes').filter(function() {
+            return $(this).html() === "&nbsp;";
+        }).remove();
+      if (!haveNotes)
+        $(this).find('.chart-notes').remove();
+
+       // make it a flexbox row
+      if (haveFlexHeight)
+        $(this).addClass('dashboard-row-flex');
+
+      // now we can set the height on all the wrappers (based on maximum
+      // figure height + room for title and notes, or data-height on the
+      // container if specified). However, don't do this if there is
+      // no flex on any of the constituent columns
+      var flexHeight = null;
+      var dataHeight = parseInt($(this).attr('data-height'));
+      if (dataHeight)
+        flexHeight = adjustedHeight(dataHeight, columns.first());
+      else if (haveFlexHeight)
+        flexHeight = maxChartHeight(figureSizes, columns);
+      if (flexHeight) {
+        if (fillPage)
+          setFlex($(this), flexHeight + ' ' + flexHeight + ' 0px');
+        else {
+          $(this).css('height', flexHeight + 'px');
+          setFlex($(this), '0 0 ' + flexHeight + 'px');
+        }
+      }
+
+    });
+  }
+
+  function layoutPageByColumns(page, fillPage) {
+
+    // column orientation
+    page.addClass('dashboard-column-orientation');
+
+    // find all the level2 sections (those are the columns)
+    var columns = page.find('div.section.level2');
+
+    // if there are no level2 sections then treat the
+    // entire page as if it's a level 2 section
+    if (columns.length === 0) {
+      page.wrapInner('<div class="section level2"></div>');
+      columns = page.find('div.section.level2');
+    }
+
+    // layout each column
+    columns.each(function (index) {
+
+      // remove the h2
+      $(this).children('h2').remove();
+
+      // make it a flexbox column
+      $(this).addClass('dashboard-column');
+
+      // check for a tabset
+      var isTabset = $(this).hasClass('tabset');
+      if (isTabset)
+        layoutTabset($(this));
+
+      // find all the h3 elements
+      var rows = $(this).find('div.section.level3');
+
+      // get the figure sizes for the rows
+      var figureSizes = chartFigureSizes(rows);
+
+      // column flex is the max row width (or data-width if specified)
+      var flexWidth;
+      var dataWidth = parseInt($(this).attr('data-width'));
+      if (dataWidth)
+        flexWidth = dataWidth;
+      else
+        flexWidth = maxChartWidth(figureSizes);
+      setFlex($(this), flexWidth + ' ' + flexWidth + ' 0px');
+
+      // layout each chart
+      rows.each(function(index) {
+
+        // perform the layout
+        var result = layoutChart($(this), false);
+
+        // ice the notes if there are none
+        if (!result.notes)
+          $(this).find('.chart-notes').remove();
+
+        // set flex height based on figHeight, then adjust
+        if (result.flex) {
+          var chartHeight = figureSizes[index].height;
+          chartHeight = adjustedHeight(chartHeight, $(this));
+          if (fillPage)
+            setFlex($(this), chartHeight + ' ' + chartHeight + ' 0px');
+          else {
+            $(this).css('height', chartHeight + 'px');
+            setFlex($(this), chartHeight + ' ' + chartHeight + ' ' + chartHeight + 'px');
+          }
+        }
+      });
+    });
+  }
+
+  function chartFigureSizes(charts) {
+
+    // sizes
+    var figureSizes = new Array(charts.length);
+
+    // check each chart
+    charts.each(function(index) {
+
+      // start with default
+      figureSizes[index] = {
+        width: _options.defaultFigWidth,
+        height: _options.defaultFigHeight
+      };
+
+      // look for data-height or data-width then knit options
+      var dataWidth = parseInt($(this).attr('data-width'));
+      var dataHeight = parseInt($(this).attr('data-height'));
+      var knitrOptions = $(this).find('.knitr-options:first');
+      var knitrWidth, knitrHeight;
+      if (knitrOptions) {
+        knitrWidth = parseInt(knitrOptions.attr('data-fig-width'));
+        knitrHeight =  parseInt(knitrOptions.attr('data-fig-height'));
+      }
+
+      // width
+      if (dataWidth)
+        figureSizes[index].width = dataWidth;
+      else if (knitrWidth)
+        figureSizes[index].width = knitrWidth;
+
+      // height
+      if (dataHeight)
+        figureSizes[index].height = dataHeight;
+      else if (knitrHeight)
+        figureSizes[index].height = knitrHeight;
+    });
+
+    // return sizes
+    return figureSizes;
+  }
+
+  function maxChartHeight(figureSizes, charts) {
+
+    // first compute the maximum height
+    var maxHeight = _options.defaultFigHeight;
+    for (var i = 0; i<figureSizes.length; i++)
+      if (figureSizes[i].height > maxHeight)
+        maxHeight = figureSizes[i].height;
+
+    // now add offests for chart title and chart notes
+    if (charts.length)
+      maxHeight = adjustedHeight(maxHeight, charts.first());
+
+    return maxHeight;
+  }
+
+  function adjustedHeight(height, chart) {
+    if (chart.length > 0) {
+      var chartTitle = chart.find('.chart-title');
+      if (chartTitle.length)
+        height += chartTitle.first().outerHeight();
+      var chartNotes = chart.find('.chart-notes');
+      if (chartNotes.length)
+        height += chartNotes.first().outerHeight();
+    }
+    return height;
+  }
+
+  function maxChartWidth(figureSizes) {
+    var maxWidth = _options.defaultFigWidth;
+    for (var i = 0; i<figureSizes.length; i++)
+      if (figureSizes[i].width > maxWidth)
+        maxWidth = figureSizes[i].width;
+    return maxWidth;
+  }
+
+  // layout a chart
+  function layoutChart(chart, forceFlex) {
+
+    // state to return
+    var result = {
+      notes: false,
+      flex: false
+    };
+
+    // extract the title
+    var title = extractTitle(chart);
+
+    // find components that apply to this container
+    var components = componentsFind(chart);
+
+    // if it's a custom component then call it and return
+    var customComponents = componentsCustom(components);
+    if (customComponents.length) {
+      componentsLayout(customComponents, title, chart);
+      result.notes = false;
+      result.flex = forceFlex || componentsFlex(customComponents);
+      return result;
+    }
+
+    // put all the content in a chart wrapper div
+    chart.addClass('chart-wrapper');
+    chart.wrapInner('<div class="chart-stage"></div>');
+    var chartContent = chart.children('.chart-stage');
+
+    // flex the content if appropriate
+    result.flex = forceFlex || componentsFlex(components);
+    if (result.flex) {
+      // add flex classes
+      chart.addClass('chart-wrapper-flex');
+      chartContent.addClass('chart-stage-flex');
+
+      // additional shim to break out of flexbox sizing
+      chartContent.wrapInner('<div class="chart-shim"></div>');
+      chartContent = chartContent.children('.chart-shim');
+    }
+
+    // set custom data-padding attribute
+    var pad = chart.attr('data-padding');
+    if (pad) {
+      if (pad === "0")
+        chart.addClass('no-padding');
+      else {
+        pad = pad + 'px';
+        chartContent.css('left', pad)
+                    .css('top', pad)
+                    .css('right', pad)
+                    .css('bottom', pad)
+      }
+    }
+
+    // call compoents
+    componentsLayout(components, title, chartContent);
+
+    // also activate components on shiny output
+    findShinyOutput(chartContent).on('shiny:value',
+      function(event) {
+        var element = $(event.target);
+        setTimeout(function() {
+
+          // see if we opted out of flex based on our output (for shiny
+          // we can't tell what type of output we have until after the
+          // value is bound)
+          var components = componentsFind(element);
+          var flex = forceFlex || componentsFlex(components);
+          if (!flex) {
+            chart.css('height', "");
+            setFlex(chart, "");
+            chart.removeClass('chart-wrapper-flex');
+            chartContent.removeClass('chart-stage-flex');
+            chartContent.children().unwrap();
+          }
+
+          // perform layout
+          componentsLayout(components, title, element.parent());
+        }, 10);
+      });
+
+    // add the title
+    var chartTitle = $('<div class="chart-title"></div>');
+    chartTitle.append(title);
+    chart.prepend(chartTitle);
+
+    // add the notes section
+    var chartNotes = $('<div class="chart-notes"></div>');
+    chartNotes.html('&nbsp;');
+    chart.append(chartNotes);
+
+    // attempt to extract notes if we have a component
+    if (components.length)
+      result.notes = extractChartNotes(chartContent, chartNotes);
+
+    // return result
+    return result;
+  }
+
+  // build a tabset from a section div with the .tabset class
+  function layoutTabset(tabset) {
+
+    // check for fade option
+    var fade = tabset.hasClass("tabset-fade");
+    var navClass = "nav-tabs";
+
+    // determine the heading level of the tabset and tabs
+    var match = tabset.attr('class').match(/level(\d) /);
+    if (match === null)
+      return;
+    var tabsetLevel = Number(match[1]);
+    var tabLevel = tabsetLevel + 1;
+
+    // find all subheadings immediately below
+    var tabs = tabset.find("div.section.level" + tabLevel);
+    if (!tabs.length)
+      return;
+
+    // create tablist and tab-content elements
+    var tabList = $('<ul class="nav ' + navClass + '" role="tablist"></ul>');
+    $(tabs[0]).before(tabList);
+    var tabContent = $('<div class="tab-content"></div>');
+    $(tabs[0]).before(tabContent);
+
+    // build the tabset
+    tabs.each(function(i) {
+
+      // get the tab div
+      var tab = $(tabs[i]);
+
+      // get the id then sanitize it for use with bootstrap tabs
+      var id = tab.attr('id');
+
+      // sanitize the id for use with bootstrap tabs
+      id = id.replace(/[.\/?&!#<>]/g, '').replace(/\s/g, '_');
+      tab.attr('id', id);
+
+      // get the heading element within it and grab it's text
+      var heading = tab.find('h' + tabLevel + ':first');
+      var headingDom = heading.contents();
+
+      // build and append the tab list item
+      var a = $('<a role="tab" data-toggle="tab"></a>');
+      a.append(headingDom);
+      a.attr('href', '#' + id);
+      a.attr('aria-controls', id);
+      var li = $('<li role="presentation"></li>');
+      li.append(a);
+      if (i === 0)
+        li.attr('class', 'active');
+      tabList.append(li);
+
+      // set it's attributes
+      tab.attr('role', 'tabpanel');
+      tab.addClass('tab-pane');
+      tab.addClass('tabbed-pane');
+      tab.addClass('no-title');
+      if (fade)
+        tab.addClass('fade');
+      if (i === 0) {
+        tab.addClass('active');
+        if (fade)
+          tab.addClass('in');
+      }
+
+      // move it into the tab content div
+      tab.detach().appendTo(tabContent);
+    });
+
+    // add nav-tabs-custom
+    tabset.addClass('nav-tabs-custom');
+
+    // internal layout is dashboard-column with tab-content flexing
+    tabset.addClass('dashboard-column');
+    setFlex(tabContent, 1);
+  }
+
+  // one time global initialization for components
+  function componentsInit(dashboardContainer) {
+    for (var i=0; i<window.FlexDashboardComponents.length; i++) {
+      var component = window.FlexDashboardComponents[i];
+      if (component.init)
+        component.init(dashboardContainer);
+    }
+  }
+
+  // find components that apply within a container
+  function componentsFind(container) {
+
+    // look for components
+    var components = [];
+    for (var i=0; i<window.FlexDashboardComponents.length; i++) {
+      var component = window.FlexDashboardComponents[i];
+      if (component.find(container).length)
+        components.push(component);
+    }
+
+    // if there were none then use a special flowing content component
+    // that just adds a scrollbar in fillPage mode
+    if (components.length == 0) {
+      components.push({
+        find: function(container) {
+          return container;
+        },
+
+        flex: function(fillPage) {
+          return fillPage;
+        },
+
+        layout: function(title, container, element, fillPage) {
+          if (fillPage) {
+            container.addClass('flowing-content-shim');
+            container.addClass('flowing-content-container');
+          }
+        }
+      });
+    }
+
+    return components;
+  }
+
+  // if there is a custom component then pick it out
+  function componentsCustom(components) {
+    var customComponent = [];
+    for (var i=0; i<components.length; i++)
+      if (components[i].type === "custom") {
+        customComponent.push(components[i]);
+        break;
+      }
+    return customComponent;
+  }
+
+  // query all components for flex
+  function componentsFlex(components) {
+
+    // no components at all means no flex
+    if (components.length === 0)
+      return false;
+
+    // otherwise query components (assume true unless we see false)
+    var isMobile = isMobilePhone();
+    for (var i=0; i<components.length; i++)
+      if (components[i].flex && !components[i].flex(_options.fillPage))
+        return false;
+    return true;
+  }
+
+  // layout all components
+  function componentsLayout(components, title, container) {
+    var isMobile = isMobilePhone();
+    for (var i=0; i<components.length; i++) {
+      var element = components[i].find(container);
+      if (components[i].layout) {
+        // call layout (don't call other components if it returns false)
+        var result = components[i].layout(title, container, element, _options.fillPage);
+        if (result === false)
+          return;
+      }
+    }
+  }
+
+  // get a reference to the h3, discover it's inner html, and remove it
+  function extractTitle(container) {
+    var h3 = container.children('h3').first();
+    var title = '';
+    if (!container.hasClass('no-title'))
+      title = h3.contents();
+    h3.detach();
+    return title;
+  }
+
+  // extract chart notes
+  function extractChartNotes(chartContent, chartNotes) {
+    // look for a terminating blockquote or image caption
+    var blockquote = chartContent.children('blockquote:last-child');
+    var caption = chartContent.children('div.image-container')
+                              .children('p.caption');
+    if (blockquote.length) {
+      chartNotes.empty().append(blockquote.children('p:first-child').contents());
+      blockquote.remove();
+      return true;
+    } else if (caption.length) {
+      chartNotes.empty().append(caption.contents());
+      caption.remove();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function findShinyOutput(chartContent) {
+    return chartContent.find('.shiny-text-output, .shiny-html-output');
+  }
+
+  // safely detect rendering on a mobile phone
+  function isMobilePhone() {
+    try
+    {
+      return ! window.matchMedia("only screen and (min-width: 768px)").matches;
+    }
+    catch(e) {
+      return false;
+    }
+  }
+
+  function isFillPage() {
+    return _options.fillPage;
+  }
+
+  // detect portrait mode
+  function isPortrait() {
+    return ($(window).width() < $(window).height());
+  }
+
+  // safely detect rendering on a tablet
+  function isTablet() {
+    try
+    {
+      return window.matchMedia("only screen and (min-width: 769px) and (max-width: 992px)").matches;
+    }
+    catch(e) {
+      return false;
+    }
+  }
+
+  // test whether this is a shiny doc
+  function isShinyDoc() {
+    return (typeof(window.Shiny) !== "undefined" && !!window.Shiny.outputBindings);
+  }
+
+  // set flex using vendor specific prefixes
+  function setFlex(el, flex) {
+    el.css('-webkit-box-flex', flex)
+      .css('-webkit-flex', flex)
+      .css('-ms-flex', flex)
+      .css('flex', flex);
+  }
+
+  // support bookmarking of pages
+  function handleLocationHash() {
+
+    // restore tab/page from bookmark
+    var hash = window.decodeURIComponent(window.location.hash);
+    if (hash.length > 0)
+      $('ul.nav a[href="' + hash + '"]').tab('show');
+    FlexDashboardUtils.manageActiveNavbarMenu();
+
+    // navigate to a tab when the history changes
+    window.addEventListener("popstate", function(e) {
+      var hash = window.decodeURIComponent(window.location.hash);
+      var activeTab = $('ul.nav a[href="' + hash + '"]');
+      if (activeTab.length) {
+        activeTab.tab('show');
+      } else {
+        $('ul.nav a:first').tab('show');
+      }
+      FlexDashboardUtils.manageActiveNavbarMenu();
+    });
+
+    // add a hash to the URL when the user clicks on a tab/page
+    $('.navbar-nav a[data-toggle="tab"]').on('click', function(e) {
+      var baseUrl = FlexDashboardUtils.urlWithoutHash(window.location.href);
+      var hash = FlexDashboardUtils.urlHash($(this).attr('href'));
+      var href = baseUrl + hash;
+      FlexDashboardUtils.setLocation(href);
+    });
+
+    // handle clicks of other links that should activate pages
+    var navPages = $('ul.navbar-nav li a[data-toggle=tab]');
+    navPages.each(function() {
+      var href =  $(this).attr('href');
+      var links = $('a[href="' + href + '"][data-toggle!=tab]');
+      links.each(function() {
+        $(this).on('click', function(e) {
+          window.FlexDashboardUtils.showPage(href);
+        });
+      });
+    });
+  }
+
+  // tweak Prism highlighting
+  function initPrismHighlighting() {
+
+    if (window.Prism) {
+      Prism.languages.insertBefore('r', 'comment', {
+        'heading': [
+          {
+            // title 1
+        	  // =======
+
+        	  // title 2
+        	  // -------
+        	  pattern: /\w+.*(?:\r?\n|\r)(?:====+|----+)/,
+            alias: 'operator'
+          },
+          {
+            // ### title 3
+            pattern: /(^\s*)###[^#].+/m,
+            lookbehind: true,
+            alias: 'operator'
+          }
+        ]
+      });
+
+      // prism highlight
+      Prism.highlightAll();
+    }
+  }
+
+
+  // get theme color
+  var themeColors = {
+    bootstrap: {
+      primary: "rgba(51, 122, 183, 0.4)",
+      info: "rgb(217, 237, 247)",
+      success: "rgb(223, 240, 216)",
+      warning: "rgb(252, 248, 227)",
+      danger: "rgb(242, 222, 222)"
+    },
+    cerulean: {
+      primary: "rgb(47, 164, 231)",
+      info: "rgb(217, 237, 247)",
+      success: "rgb(223, 240, 216)",
+      warning: "rgb(252, 248, 227)",
+      danger: "rgb(242, 222, 222)"
+    },
+    journal: {
+      primary: "rgba(235, 104, 100, 0.70)",
+      info: "rgb(217, 237, 247)",
+      success: "rgb(223, 240, 216)",
+      warning: "rgb(252, 248, 227)",
+      danger: "rgb(242, 222, 222)"
+    },
+    flatly: {
+      primary: "rgba(44, 62, 80, 0.70)",
+      info: "rgba(52, 152, 219, 0.70)",
+      success: "rgba(24, 188, 156, 0.70)",
+      warning: "rgba(243, 156, 18, 0.70)",
+      danger: "rgba(231, 76, 60, 0.70)"
+    },
+    readable: {
+      primary: "rgba(69, 130, 236, 0.4)",
+      info: "rgb(217, 237, 247)",
+      success: "rgb(223, 240, 216)",
+      warning: "rgb(252, 248, 227)",
+      danger: "rgb(242, 222, 222)"
+    },
+    spacelab: {
+      primary: "rgba(68, 110, 155, 0.25)",
+      info: "rgb(217, 237, 247)",
+      success: "rgb(223, 240, 216)",
+      warning: "rgb(252, 248, 227)",
+      danger: "rgb(242, 222, 222)"
+    },
+    united: {
+      primary: "rgba(221, 72, 20, 0.30)",
+      info: "rgb(217, 237, 247)",
+      success: "rgb(223, 240, 216)",
+      warning: "rgb(252, 248, 227)",
+      danger: "rgb(242, 222, 222)"
+    },
+    cosmo: {
+      primary: "rgba(39, 128, 227, 0.7)",
+      info: "rgba(153, 84, 187, 0.7)",
+      success: "rgba(63, 182, 24, 0.7)",
+      warning: "rgba(255, 117, 24, 0.7)",
+      danger: "rgba(255, 0, 57, 0.7)"
+    },
+    lumen: {
+      primary: "rgba(21, 140, 186, 0.70)",
+      info: "rgba(117, 202, 235, 0.90)",
+      success: "rgba(40, 182, 44, 0.70)",
+      warning: "rgba(255, 133, 27, 0.70)",
+      danger: "rgba(255, 65, 54, 0.70)"
+    },
+    paper: {
+      primary: "rgba(33, 150, 243, 0.35)",
+      info: "rgb(225, 190, 231)",
+      success: "rgb(223, 240, 216)",
+      warning: "rgb(255, 224, 178)",
+      danger: "rgb(249, 189, 187)"
+    },
+    sandstone: {
+      primary: "rgba(50, 93, 136, 0.3)",
+      info: "rgb(217, 237, 247)",
+      success: "rgb(223, 240, 216)",
+      warning: "rgb(252, 248, 227)",
+      danger: "rgb(242, 222, 222)"
+    },
+    simplex: {
+      primary: "rgba(217, 35, 15, 0.25)",
+      info: "rgb(217, 237, 247)",
+      success: "rgb(223, 240, 216)",
+      warning: "rgb(252, 248, 227)",
+      danger: "rgb(242, 222, 222)"
+    },
+    yeti: {
+      primary: "rgba(0, 140, 186, 0.298039)",
+      info: "rgb(217, 237, 247)",
+      success: "rgb(223, 240, 216)",
+      warning: "rgb(252, 248, 227)",
+      danger: "rgb(242, 222, 222)"
+    }
+  }
+  function themeColor(color) {
+    return themeColors[_options.theme][color];
+  }
+
+  FlexDashboard.prototype = {
+    constructor: FlexDashboard,
+    init: init,
+    isMobilePhone: isMobilePhone,
+    isFillPage: isFillPage,
+    themeColor: themeColor
+  };
+
+  return FlexDashboard;
+
+})();
+
+// utils
+window.FlexDashboardUtils = {
+  resizableImage: function(img) {
+    var src = img.attr('src');
+    var url = 'url("' + src + '")';
+    img.parent().css('background', url)
+                .css('background-size', 'contain')
+                .css('background-repeat', 'no-repeat')
+                .css('background-position', 'center')
+                .addClass('image-container');
+  },
+  setLocation: function(href) {
+    if (history && history.pushState) {
+      history.pushState(null, null, href);
+    } else {
+      window.location.replace(href);
+    }
+    setTimeout(function() {
+        window.scrollTo(0, 0);
+    }, 10);
+    this.manageActiveNavbarMenu();
+  },
+  showPage: function(href) {
+    $('ul.navbar-nav li a[href="' + href + '"]').tab('show');
+    var baseUrl = this.urlWithoutHash(window.location.href);
+    var loc = baseUrl + href;
+    this.setLocation(loc);
+  },
+  showLinkedValue: function(href) {
+    // check for a page link
+    if ($('ul.navbar-nav li a[data-toggle=tab][href="' + href + '"]').length > 0)
+      this.showPage(href);
+    else
+      window.open(href);
+  },
+  urlWithoutHash: function(url) {
+    var hashLoc = url.indexOf('#');
+    if (hashLoc != -1)
+      return url.substring(0, hashLoc);
+    else
+      return url;
+  },
+  urlHash: function(url) {
+    var hashLoc = url.indexOf('#');
+    if (hashLoc != -1)
+      return url.substring(hashLoc);
+    else
+      return "";
+  },
+  manageActiveNavbarMenu: function () {
+    // remove active from anyone currently active
+    $('.navbar ul.nav').find('li').removeClass('active');
+    // find the active tab
+    var activeTab = $('.dashboard-page-wrapper.tab-pane.active');
+    if (activeTab.length > 0) {
+      var tabId = activeTab.attr('id');
+      if (tabId)
+        $(".navbar ul.nav a[href='#" + tabId + "']").parents('li').addClass('active');
+    }
+  }
+};
+
+window.FlexDashboard = new FlexDashboard();
+
+// empty content
+window.FlexDashboardComponents.push({
+  find: function(container) {
+    if (container.find('p').length == 0)
+      return container;
+    else
+      return $();
+  }
+})
+
+// plot image
+window.FlexDashboardComponents.push({
+
+  find: function(container) {
+    return container.children('p')
+                    .children('img:only-child');
+  },
+
+  layout: function(title, container, element, fillPage) {
+    FlexDashboardUtils.resizableImage(element);
+  }
+});
+
+// plot image (figure style)
+window.FlexDashboardComponents.push({
+
+  find: function(container) {
+    return container.children('div.figure').children('img');
+  },
+
+  layout: function(title, container, element, fillPage) {
+    FlexDashboardUtils.resizableImage(element);
+  }
+});
+
+// htmlwidget
+window.FlexDashboardComponents.push({
+
+  init: function(dashboardContainer) {
+    // trigger "shown" after initial layout to force static htmlwidgets
+    // in runtime: shiny to be resized after the dom has been transformed
+    dashboardContainer.on('flexdashboard:layoutcomplete', function(event) {
+      setTimeout(function() {
+        dashboardContainer.trigger('shown');
+      }, 200);
+    });
+  },
+
+  find: function(container) {
+    return container.children('div[id^="htmlwidget-"],div.html-widget');
+  }
+});
+
+// gauge
+window.FlexDashboardComponents.push({
+
+  find: function(container) {
+    return container.children('div.html-widget.gauge');
+  },
+
+  flex: function(fillPage) {
+    return false;
+  },
+
+  layout: function(title, container, element, fillPage) {
+
+
+  }
+
+});
+
+// shiny output
+window.FlexDashboardComponents.push({
+  find: function(container) {
+    return container.children('div[class^="shiny-"]');
+  }
+});
+
+// datatables
+window.FlexDashboardComponents.push({
+  find: function(container) {
+    return container.find('.datatables');
+  },
+  flex: function(fillPage) {
+    return fillPage;
+  }
+});
+
+// bootstrap table
+window.FlexDashboardComponents.push({
+
+  find: function(container) {
+    var bsTable = container.find('table.table');
+    if (bsTable.length !== 0)
+      return bsTable;
+    else
+      return container.find('tr.header').parent('thead').parent('table');
+  },
+
+  flex: function(fillPage) {
+    return fillPage;
+  },
+
+  layout: function(title, container, element, fillPage) {
+
+    // alias variables
+    var bsTable = element;
+
+    // fixup xtable generated tables with a proper thead
+    var headerRow = bsTable.find('tbody > tr:first-child > th').parent();
+    if (headerRow.length > 0) {
+      var thead = $('<thead></thead>');
+      bsTable.prepend(thead);
+      headerRow.detach().appendTo(thead);
+    }
+
+    // improve appearance
+    container.addClass('bootstrap-table');
+
+    // for fill page provide scrolling w/ sticky headers
+    if (fillPage) {
+      // force scrollbar on overflow
+      container.addClass('flowing-content-shim');
+
+      // stable table headers when scrolling
+      bsTable.stickyTableHeaders({
+        scrollableArea: container
+      });
+    }
+  }
+});
+
+// embedded shiny app
+window.FlexDashboardComponents.push({
+
+  find: function(container) {
+    return container.find('iframe.shiny-frame');
+  },
+
+  flex: function(fillPage) {
+    return fillPage;
+  },
+
+  layout: function(title, container, element, fillPage) {
+    if (fillPage) {
+      element.attr('height', '100%');
+    } else {
+      // provide default height if necessary
+      var height = element.get(0).style.height;
+      if (!height)
+        height = element.attr('height');
+      if (!height)
+        element.attr('height', 500);
+    }
+  }
+});
+
+// shiny fillRow or fillCol
+window.FlexDashboardComponents.push({
+
+  find: function(container) {
+    return container.find('.flexfill-container');
+  },
+
+  flex: function(fillPage) {
+    return fillPage;
+  },
+
+  layout: function(title, container, element, fillPage) {
+    if (fillPage)
+      element.css('height', '100%');
+    else {
+      // provide default height if necessary
+      var height = element.get(0).style.height;
+      if (height === "100%" || height === "auto" || height === "initial" ||
+          height === "inherit" || !height) {
+        element.css('height', 500);
+      }
+    }
+  }
+});
+
+// valueBox
+window.FlexDashboardComponents.push({
+
+  type: "custom",
+
+  find: function(container) {
+    if (container.find('span.value-output, .shiny-valuebox-output').length)
+      return container;
+    else
+      return $();
+  },
+
+  flex: function(fillPage) {
+    return false;
+  },
+
+  layout: function(title, container, element, fillPage) {
+
+    // alias variables
+    var chartTitle = title;
+    var valueBox = element;
+
+    // add value-box class to container
+    container.addClass('value-box');
+
+    // value paragraph
+    var value = $('<p class="value"></p>');
+
+    // if we have shiny-text-output then just move it in
+    var valueOutputSpan = [];
+    var shinyOutput = valueBox.find('.shiny-valuebox-output').detach();
+    if (shinyOutput.length) {
+      valueBox.children().remove();
+      shinyOutput.html("&mdash;");
+      value.append(shinyOutput);
+    } else {
+      // extract the value (remove leading vector index)
+      var chartValue = valueBox.text().trim();
+      chartValue = chartValue.replace("[1] ", "");
+      valueOutputSpan = valueBox.find('span.value-output').detach();
+      valueBox.children().remove();
+      value.text(chartValue);
+    }
+
+    // caption
+    var caption = $('<p class="caption"></p>');
+    caption.append(chartTitle);
+
+    // build inner div for value box and add it
+    var inner = $('<div class="inner"></div>');
+    inner.append(value);
+    inner.append(caption);
+    valueBox.append(inner);
+
+    // add icon if specified
+    var icon = $('<div class="icon"><i></i></div>');
+    valueBox.append(icon);
+    function setIcon(chartIcon) {
+      var iconLib = "";
+      var iconSplit = chartIcon.split(" ");
+      if (iconSplit.length > 1) {
+        iconLib = iconSplit[0];
+        chartIcon = iconSplit.slice(1).join(" ");
+      } else {
+        var components = chartIcon.split("-");
+        if (components.length > 1)
+          iconLib = components[0];
+      }
+      icon.children('i').attr('class', iconLib + ' ' + chartIcon);
+    }
+    var chartIcon = valueBox.attr('data-icon');
+    if (chartIcon)
+      setIcon(chartIcon);
+
+    // set color based on data-background if necessary
+    var dataBackground = valueBox.attr('data-background');
+    if (dataBackground)
+      valueBox.css('background-color', bgColor);
+    else {
+      // default to bg-primary if no other background is specified
+      if (!valueBox.hasClass('bg-primary') &&
+          !valueBox.hasClass('bg-info') &&
+          !valueBox.hasClass('bg-warning') &&
+          !valueBox.hasClass('bg-success') &&
+          !valueBox.hasClass('bg-danger')) {
+        valueBox.addClass('bg-primary');
+      }
+    }
+
+    // handle data attributes in valueOutputSpan
+    function handleValueOutput(valueOutput) {
+
+      // caption
+      var dataCaption = valueOutput.attr('data-caption');
+      if (dataCaption)
+        caption.html(dataCaption);
+
+      // icon
+      var dataIcon = valueOutput.attr('data-icon');
+      if (dataIcon)
+        setIcon(dataIcon);
+
+      // color
+      var dataColor = valueOutput.attr('data-color');
+      if (dataColor) {
+        if (dataColor.indexOf('bg-') === 0) {
+          valueBox.css('background-color', '');
+          if (!valueBox.hasClass(dataColor)) {
+             valueBox.removeClass('bg-primary bg-info bg-warning bg-danger bg-success');
+             valueBox.addClass(dataColor);
+          }
+        } else {
+          valueBox.removeClass('bg-primary bg-info bg-warning bg-danger bg-success');
+          valueBox.css('background-color', dataColor);
+        }
+      }
+
+      // url
+      var dataHref = valueOutput.attr('data-href');
+      if (dataHref) {
+        valueBox.addClass('linked-value');
+        valueBox.off('click.value-box');
+        valueBox.on('click.value-box', function(e) {
+          window.FlexDashboardUtils.showLinkedValue(dataHref);
+        });
+      }
+    }
+
+    // check for a valueOutputSpan
+    if (valueOutputSpan.length > 0) {
+      handleValueOutput(valueOutputSpan);
+    }
+
+    // if we have a shinyOutput then bind a listener to handle
+    // new valueOutputSpan values
+    shinyOutput.on('shiny:value',
+      function(event) {
+        var element = $(event.target);
+        setTimeout(function() {
+          var valueOutputSpan = element.find('span.value-output');
+          if (valueOutputSpan.length > 0)
+            handleValueOutput(valueOutputSpan);
+        }, 10);
+      }
+    );
+  }
+});
+</script>
+
+<div id="dashboard-container">
+
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<!-- # Results -->
+<!-- Column {data-width=330} -->
+<!-- ----------------------------- -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.1/fuse.min.js" integrity="sha512-ZPl2kit+IHqC/C4Zsz7B7qgO9zVzPeLZI+QcsvJekv0Cvmv2TUXgWEt1lsDz07Okd63jfCuZBo/3/OQsWb/eGQ==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js" integrity="sha512-qOBWNAMfkz+vXXgbh0Wz7qYSLZp6c14R0bZeVX2TdQxWpuKr6yHjBIM69fcF8Ve4GUX6B6AKRQJqiiAmwvmUmQ==" crossorigin="anonymous"></script>
+<script language="JavaScript" src="../geojson/ltla_search_data.js"></script>
+<script language="JavaScript" src="../js/ltla_search.js"></script>
+<!-- Row {data-height=70} -->
+<!-- --------- -->
+<!-- ### Local authority search {.search-outside-box} -->
+<!-- ```{r} -->
+<!-- htmltools::includeHTML("fragments/ltla_search.html") -->
+<!-- ``` -->
+<div id="row" class="section level2">
+<h2>Row</h2>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<div id="probability-of-50-cases-2020-08-29" class="section level3">
+<h3>Probability of &gt; 50 cases (2020-08-29)</h3>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<div id="htmlwidget-0f7e094fff45065c2d69" style="width:576px;height:460.8px;" class="gauge html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0f7e094fff45065c2d69">{"x":{"value":0,"min":0,"max":100,"customSectors":[{"lo":0,"hi":25,"color":"#ABC7D9"},{"lo":25,"hi":75,"color":"#ffd166"},{"lo":75,"hi":100,"color":"#ef4848"}],"symbol":"%","label":null,"humanFriendly":true,"humanFriendlyDecimal":1,"href":null},"evals":[],"jsHooks":[]}</script>
+<blockquote>
+<p>Per 100,000 population and week. Week ending on the above date.</p>
+</blockquote>
+</div>
+<div id="probability-of-50-cases-2020-09-05" class="section level3">
+<h3>Probability of &gt; 50 cases (2020-09-05)</h3>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<div id="htmlwidget-ae5b7ef9fbeb5f08f97c" style="width:576px;height:460.8px;" class="gauge html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ae5b7ef9fbeb5f08f97c">{"x":{"value":0,"min":0,"max":100,"customSectors":[{"lo":0,"hi":25,"color":"#ABC7D9"},{"lo":25,"hi":75,"color":"#ffd166"},{"lo":75,"hi":100,"color":"#ef4848"}],"symbol":"%","label":null,"humanFriendly":true,"humanFriendlyDecimal":1,"href":null},"evals":[],"jsHooks":[]}</script>
+<blockquote>
+<p>Per 100,000 population and week. Week ending on the above date.</p>
+</blockquote>
+</div>
+<div id="probability-of-50-cases-2020-09-12" class="section level3">
+<h3>Probability of &gt; 50 cases (2020-09-12)</h3>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<div id="htmlwidget-3c7807863004b195e89c" style="width:576px;height:460.8px;" class="gauge html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3c7807863004b195e89c">{"x":{"value":1,"min":0,"max":100,"customSectors":[{"lo":0,"hi":25,"color":"#ABC7D9"},{"lo":25,"hi":75,"color":"#ffd166"},{"lo":75,"hi":100,"color":"#ef4848"}],"symbol":"%","label":null,"humanFriendly":true,"humanFriendlyDecimal":1,"href":null},"evals":[],"jsHooks":[]}</script>
+<blockquote>
+<p>Per 100,000 population and week. Week ending on the above date.</p>
+</blockquote>
+</div>
+<div id="probability-of-r-greater-1-2020-08-29" class="section level3">
+<h3>Probability of R greater 1 (2020-08-29)</h3>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<div id="htmlwidget-501f98332d59e6b9cbbd" style="width:576px;height:460.8px;" class="gauge html-widget"></div>
+<script type="application/json" data-for="htmlwidget-501f98332d59e6b9cbbd">{"x":{"value":53,"min":0,"max":100,"customSectors":[{"lo":0,"hi":25,"color":"#87D2CB"},{"lo":25,"hi":75,"color":"#E0E0E0"},{"lo":75,"hi":100,"color":"#EFBF7E"}],"symbol":"%","label":null,"humanFriendly":true,"humanFriendlyDecimal":1,"href":null},"evals":[],"jsHooks":[]}</script>
+<blockquote>
+<p>Week ending on the date in the title.</p>
+</blockquote>
+</div>
+<div id="local-authority-search" class="section level3 search-outside-box">
+<h3>Local authority search</h3>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<div id="ltlaSearch">
+  <form>
+  <div class="form-group">
+    <input type="text" class="typeahead" id="ltlaSearchInput" placeholder="Local authority">
+    </div>
+    </form>
+</div>
+<blockquote>
+<p>Switch local authority.</p>
+</blockquote>
+</div>
+</div>
+<div id="row-1" class="section level2">
+<h2>Row</h2>
+<div id="reproduction-number" class="section level3">
+<h3>Reproduction Number</h3>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<div id="htmlwidget-48ea74db927bed8a4067" style="width:576px;height:460.8px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-48ea74db927bed8a4067">{"x":{"data":[{"x":[18414,18415,18416,18417,18418,18419,18420,18421,18422,18423,18424,18425,18426,18427,18428,18429,18430,18431,18432,18433,18434,18435,18436,18437,18438,18439,18440,18441,18442,18443,18444,18445,18446,18447,18448,18449,18450,18451,18452,18453,18454,18455,18456,18457,18458,18459,18460,18461,18462,18463,18464,18465,18466,18467,18468,18469,18470,18471,18472,18473,18474,18475,18476,18477,18478,18479,18480,18481,18482,18483,18484,18485,18486,18487,18488,18489,18490,18491,18492,18493,18494,18495,18496,18497,18498,18499,18500,18501,18502,18503,18504,18505,18506,18507,18508,18509,18510,18511,18512,18513,18514,18515,18516,18517,18518,18519,18520,18521,18522,18522,18521,18520,18519,18518,18517,18516,18515,18514,18513,18512,18511,18510,18509,18508,18507,18506,18505,18504,18503,18502,18501,18500,18499,18498,18497,18496,18495,18494,18493,18492,18491,18490,18489,18488,18487,18486,18485,18484,18483,18482,18481,18480,18479,18478,18477,18476,18475,18474,18473,18472,18471,18470,18469,18468,18467,18466,18465,18464,18463,18462,18461,18460,18459,18458,18457,18456,18455,18454,18453,18452,18451,18450,18449,18448,18447,18446,18445,18444,18443,18442,18441,18440,18439,18438,18437,18436,18435,18434,18433,18432,18431,18430,18429,18428,18427,18426,18425,18424,18423,18422,18421,18420,18419,18418,18417,18416,18415,18414,18414],"y":[0.569690102186739,0.569612912028207,0.569527634943765,0.56943869433926,0.626544536249849,0.626473559855304,0.626402951199328,0.626346286087123,0.626287123776282,0.626222022117904,0.626163899469189,0.647687700656703,0.647625914285605,0.647482814733417,0.64740835965201,0.647348933545707,0.647254739282749,0.647168706946707,0.671842313560246,0.671755132415575,0.671684281607866,0.671615858281609,0.671543818313278,0.671490440535825,0.671445053080963,0.69441959758206,0.694324930720891,0.69428585191568,0.694237972203283,0.69419050927433,0.694121050306676,0.694072298733757,0.724738293340796,0.724687109882372,0.724639201034854,0.72455333776512,0.724516057696898,0.724464925124439,0.724423456563148,0.758507945967512,0.758453165005099,0.75840954495022,0.758353484419738,0.75829693438408,0.758258536758324,0.758216640273042,0.775559466369421,0.77550044082817,0.775459088354128,0.77540293888224,0.775314139438924,0.775246563252682,0.775178873930864,0.787105932344586,0.787018657130501,0.786978192638159,0.786934323297702,0.786882302783313,0.786815062553878,0.786751772790617,0.777246302057616,0.777126037214001,0.777034240285906,0.776911975997594,0.776778774658697,0.776676871146364,0.776575030035834,0.753718998441634,0.753670376799549,0.753608937479452,0.753517781830349,0.753476113609421,0.753404406065292,0.753340325080867,0.724772021944632,0.724718021197446,0.724639035445627,0.724579705623776,0.724518545217659,0.724457415048533,0.724382249295226,0.734610584170327,0.734529514267658,0.734443275530129,0.734345169525679,0.734245301194018,0.734140309865925,0.734024776750245,0.734022503129239,0.734015495569887,0.734008592214968,0.734007149937742,0.734005434871465,0.734001997397412,0.733998440542758,0.733991280291416,0.73398547417149,0.733983810008158,0.733967984703785,0.733963911901028,0.733962140823551,0.733950689332007,0.733947156767488,0.733944234444247,0.733932277441989,0.733929623846009,0.733927944186608,0.733925485944293,0.7339244831372,1.36665762509858,1.36716687875794,1.36762081089778,1.3680279801845,1.36846443526652,1.36879954188754,1.36925345780447,1.36960543102372,1.36989067462057,1.37025103211027,1.37056568310879,1.37087269421493,1.37119467483726,1.37160606664536,1.37183895908243,1.37206615565793,1.37229043261002,1.37253880102475,1.37278074042852,1.37305443565991,1.37322370600498,1.37346701640092,1.37387513996685,1.37423894825211,1.37454438832365,1.37484943131297,1.37522985532907,1.37565052887199,1.35853378052877,1.35875237812525,1.35889995552089,1.35912855170983,1.35938353548098,1.35961033808299,1.3598021056013,1.31151375638045,1.31161344145935,1.3117473214767,1.31185557101211,1.31199152708424,1.31208798290726,1.31219337306205,1.24874622601338,1.24888210090096,1.24902000818607,1.24912730018266,1.24925801039687,1.24938712816991,1.24950360196378,1.18643676528032,1.18651066591125,1.18657815424774,1.18668264446672,1.18678321726711,1.18688811118197,1.18698852278838,1.13023492288336,1.1303413374263,1.13045123422615,1.13057921542103,1.1306666559395,1.1308011818014,1.13094716427504,1.09549055426675,1.0956367881318,1.09575566143555,1.09587131661336,1.09597279391873,1.09606358796014,1.09626093082954,1.05114069504315,1.0512309941046,1.05134077109876,1.05142512898678,1.05149524871731,1.05161777430478,1.0516942961473,1.0076922742023,1.00784148112615,1.00793855620555,1.00803786562037,1.00816442767859,1.00827737888794,1.0083868430896,0.962756229934818,0.962860478997857,0.962968654834741,0.96305304811553,0.963156397977338,0.963321032008828,0.963448991326011,0.93039069915432,0.930565686350644,0.930692785716638,0.930798045088842,0.93092846915265,0.931049085427617,0.931186201099393,0.885591396700007,0.88572666376154,0.885852416616676,0.885988481196756,0.886125183267756,0.88629879347633,0.886470868651949,0.815341506789156,0.815439512069013,0.815558207095966,0.815675839335649,0.569690102186739],"text":["lower: 0.57<br />upper: 0.82<br />date: 2020-06-01","lower: 0.57<br />upper: 0.82<br />date: 2020-06-02","lower: 0.57<br />upper: 0.82<br />date: 2020-06-03","lower: 0.57<br />upper: 0.82<br />date: 2020-06-04","lower: 0.63<br />upper: 0.89<br />date: 2020-06-05","lower: 0.63<br />upper: 0.89<br />date: 2020-06-06","lower: 0.63<br />upper: 0.89<br />date: 2020-06-07","lower: 0.63<br />upper: 0.89<br />date: 2020-06-08","lower: 0.63<br />upper: 0.89<br />date: 2020-06-09","lower: 0.63<br />upper: 0.89<br />date: 2020-06-10","lower: 0.63<br />upper: 0.89<br />date: 2020-06-11","lower: 0.65<br />upper: 0.93<br />date: 2020-06-12","lower: 0.65<br />upper: 0.93<br />date: 2020-06-13","lower: 0.65<br />upper: 0.93<br />date: 2020-06-14","lower: 0.65<br />upper: 0.93<br />date: 2020-06-15","lower: 0.65<br />upper: 0.93<br />date: 2020-06-16","lower: 0.65<br />upper: 0.93<br />date: 2020-06-17","lower: 0.65<br />upper: 0.93<br />date: 2020-06-18","lower: 0.67<br />upper: 0.96<br />date: 2020-06-19","lower: 0.67<br />upper: 0.96<br />date: 2020-06-20","lower: 0.67<br />upper: 0.96<br />date: 2020-06-21","lower: 0.67<br />upper: 0.96<br />date: 2020-06-22","lower: 0.67<br />upper: 0.96<br />date: 2020-06-23","lower: 0.67<br />upper: 0.96<br />date: 2020-06-24","lower: 0.67<br />upper: 0.96<br />date: 2020-06-25","lower: 0.69<br />upper: 1.01<br />date: 2020-06-26","lower: 0.69<br />upper: 1.01<br />date: 2020-06-27","lower: 0.69<br />upper: 1.01<br />date: 2020-06-28","lower: 0.69<br />upper: 1.01<br />date: 2020-06-29","lower: 0.69<br />upper: 1.01<br />date: 2020-06-30","lower: 0.69<br />upper: 1.01<br />date: 2020-07-01","lower: 0.69<br />upper: 1.01<br />date: 2020-07-02","lower: 0.72<br />upper: 1.05<br />date: 2020-07-03","lower: 0.72<br />upper: 1.05<br />date: 2020-07-04","lower: 0.72<br />upper: 1.05<br />date: 2020-07-05","lower: 0.72<br />upper: 1.05<br />date: 2020-07-06","lower: 0.72<br />upper: 1.05<br />date: 2020-07-07","lower: 0.72<br />upper: 1.05<br />date: 2020-07-08","lower: 0.72<br />upper: 1.05<br />date: 2020-07-09","lower: 0.76<br />upper: 1.10<br />date: 2020-07-10","lower: 0.76<br />upper: 1.10<br />date: 2020-07-11","lower: 0.76<br />upper: 1.10<br />date: 2020-07-12","lower: 0.76<br />upper: 1.10<br />date: 2020-07-13","lower: 0.76<br />upper: 1.10<br />date: 2020-07-14","lower: 0.76<br />upper: 1.10<br />date: 2020-07-15","lower: 0.76<br />upper: 1.10<br />date: 2020-07-16","lower: 0.78<br />upper: 1.13<br />date: 2020-07-17","lower: 0.78<br />upper: 1.13<br />date: 2020-07-18","lower: 0.78<br />upper: 1.13<br />date: 2020-07-19","lower: 0.78<br />upper: 1.13<br />date: 2020-07-20","lower: 0.78<br />upper: 1.13<br />date: 2020-07-21","lower: 0.78<br />upper: 1.13<br />date: 2020-07-22","lower: 0.78<br />upper: 1.13<br />date: 2020-07-23","lower: 0.79<br />upper: 1.19<br />date: 2020-07-24","lower: 0.79<br />upper: 1.19<br />date: 2020-07-25","lower: 0.79<br />upper: 1.19<br />date: 2020-07-26","lower: 0.79<br />upper: 1.19<br />date: 2020-07-27","lower: 0.79<br />upper: 1.19<br />date: 2020-07-28","lower: 0.79<br />upper: 1.19<br />date: 2020-07-29","lower: 0.79<br />upper: 1.19<br />date: 2020-07-30","lower: 0.78<br />upper: 1.25<br />date: 2020-07-31","lower: 0.78<br />upper: 1.25<br />date: 2020-08-01","lower: 0.78<br />upper: 1.25<br />date: 2020-08-02","lower: 0.78<br />upper: 1.25<br />date: 2020-08-03","lower: 0.78<br />upper: 1.25<br />date: 2020-08-04","lower: 0.78<br />upper: 1.25<br />date: 2020-08-05","lower: 0.78<br />upper: 1.25<br />date: 2020-08-06","lower: 0.75<br />upper: 1.31<br />date: 2020-08-07","lower: 0.75<br />upper: 1.31<br />date: 2020-08-08","lower: 0.75<br />upper: 1.31<br />date: 2020-08-09","lower: 0.75<br />upper: 1.31<br />date: 2020-08-10","lower: 0.75<br />upper: 1.31<br />date: 2020-08-11","lower: 0.75<br />upper: 1.31<br />date: 2020-08-12","lower: 0.75<br />upper: 1.31<br />date: 2020-08-13","lower: 0.72<br />upper: 1.36<br />date: 2020-08-14","lower: 0.72<br />upper: 1.36<br />date: 2020-08-15","lower: 0.72<br />upper: 1.36<br />date: 2020-08-16","lower: 0.72<br />upper: 1.36<br />date: 2020-08-17","lower: 0.72<br />upper: 1.36<br />date: 2020-08-18","lower: 0.72<br />upper: 1.36<br />date: 2020-08-19","lower: 0.72<br />upper: 1.36<br />date: 2020-08-20","lower: 0.73<br />upper: 1.38<br />date: 2020-08-21","lower: 0.73<br />upper: 1.38<br />date: 2020-08-22","lower: 0.73<br />upper: 1.37<br />date: 2020-08-23","lower: 0.73<br />upper: 1.37<br />date: 2020-08-24","lower: 0.73<br />upper: 1.37<br />date: 2020-08-25","lower: 0.73<br />upper: 1.37<br />date: 2020-08-26","lower: 0.73<br />upper: 1.37<br />date: 2020-08-27","lower: 0.73<br />upper: 1.37<br />date: 2020-08-28","lower: 0.73<br />upper: 1.37<br />date: 2020-08-29","lower: 0.73<br />upper: 1.37<br />date: 2020-08-30","lower: 0.73<br />upper: 1.37<br />date: 2020-08-31","lower: 0.73<br />upper: 1.37<br />date: 2020-09-01","lower: 0.73<br />upper: 1.37<br />date: 2020-09-02","lower: 0.73<br />upper: 1.37<br />date: 2020-09-03","lower: 0.73<br />upper: 1.37<br />date: 2020-09-04","lower: 0.73<br />upper: 1.37<br />date: 2020-09-05","lower: 0.73<br />upper: 1.37<br />date: 2020-09-06","lower: 0.73<br />upper: 1.37<br />date: 2020-09-07","lower: 0.73<br />upper: 1.37<br />date: 2020-09-08","lower: 0.73<br />upper: 1.37<br />date: 2020-09-09","lower: 0.73<br />upper: 1.37<br />date: 2020-09-10","lower: 0.73<br />upper: 1.37<br />date: 2020-09-11","lower: 0.73<br />upper: 1.37<br />date: 2020-09-12","lower: 0.73<br />upper: 1.37<br />date: 2020-09-13","lower: 0.73<br />upper: 1.37<br />date: 2020-09-14","lower: 0.73<br />upper: 1.37<br />date: 2020-09-15","lower: 0.73<br />upper: 1.37<br />date: 2020-09-16","lower: 0.73<br />upper: 1.37<br />date: 2020-09-17","lower: 0.73<br />upper: 1.37<br />date: 2020-09-17","lower: 0.73<br />upper: 1.37<br />date: 2020-09-16","lower: 0.73<br />upper: 1.37<br />date: 2020-09-15","lower: 0.73<br />upper: 1.37<br />date: 2020-09-14","lower: 0.73<br />upper: 1.37<br />date: 2020-09-13","lower: 0.73<br />upper: 1.37<br />date: 2020-09-12","lower: 0.73<br />upper: 1.37<br />date: 2020-09-11","lower: 0.73<br />upper: 1.37<br />date: 2020-09-10","lower: 0.73<br />upper: 1.37<br />date: 2020-09-09","lower: 0.73<br />upper: 1.37<br />date: 2020-09-08","lower: 0.73<br />upper: 1.37<br />date: 2020-09-07","lower: 0.73<br />upper: 1.37<br />date: 2020-09-06","lower: 0.73<br />upper: 1.37<br />date: 2020-09-05","lower: 0.73<br />upper: 1.37<br />date: 2020-09-04","lower: 0.73<br />upper: 1.37<br />date: 2020-09-03","lower: 0.73<br />upper: 1.37<br />date: 2020-09-02","lower: 0.73<br />upper: 1.37<br />date: 2020-09-01","lower: 0.73<br />upper: 1.37<br />date: 2020-08-31","lower: 0.73<br />upper: 1.37<br />date: 2020-08-30","lower: 0.73<br />upper: 1.37<br />date: 2020-08-29","lower: 0.73<br />upper: 1.37<br />date: 2020-08-28","lower: 0.73<br />upper: 1.37<br />date: 2020-08-27","lower: 0.73<br />upper: 1.37<br />date: 2020-08-26","lower: 0.73<br />upper: 1.37<br />date: 2020-08-25","lower: 0.73<br />upper: 1.37<br />date: 2020-08-24","lower: 0.73<br />upper: 1.37<br />date: 2020-08-23","lower: 0.73<br />upper: 1.38<br />date: 2020-08-22","lower: 0.73<br />upper: 1.38<br />date: 2020-08-21","lower: 0.72<br />upper: 1.36<br />date: 2020-08-20","lower: 0.72<br />upper: 1.36<br />date: 2020-08-19","lower: 0.72<br />upper: 1.36<br />date: 2020-08-18","lower: 0.72<br />upper: 1.36<br />date: 2020-08-17","lower: 0.72<br />upper: 1.36<br />date: 2020-08-16","lower: 0.72<br />upper: 1.36<br />date: 2020-08-15","lower: 0.72<br />upper: 1.36<br />date: 2020-08-14","lower: 0.75<br />upper: 1.31<br />date: 2020-08-13","lower: 0.75<br />upper: 1.31<br />date: 2020-08-12","lower: 0.75<br />upper: 1.31<br />date: 2020-08-11","lower: 0.75<br />upper: 1.31<br />date: 2020-08-10","lower: 0.75<br />upper: 1.31<br />date: 2020-08-09","lower: 0.75<br />upper: 1.31<br />date: 2020-08-08","lower: 0.75<br />upper: 1.31<br />date: 2020-08-07","lower: 0.78<br />upper: 1.25<br />date: 2020-08-06","lower: 0.78<br />upper: 1.25<br />date: 2020-08-05","lower: 0.78<br />upper: 1.25<br />date: 2020-08-04","lower: 0.78<br />upper: 1.25<br />date: 2020-08-03","lower: 0.78<br />upper: 1.25<br />date: 2020-08-02","lower: 0.78<br />upper: 1.25<br />date: 2020-08-01","lower: 0.78<br />upper: 1.25<br />date: 2020-07-31","lower: 0.79<br />upper: 1.19<br />date: 2020-07-30","lower: 0.79<br />upper: 1.19<br />date: 2020-07-29","lower: 0.79<br />upper: 1.19<br />date: 2020-07-28","lower: 0.79<br />upper: 1.19<br />date: 2020-07-27","lower: 0.79<br />upper: 1.19<br />date: 2020-07-26","lower: 0.79<br />upper: 1.19<br />date: 2020-07-25","lower: 0.79<br />upper: 1.19<br />date: 2020-07-24","lower: 0.78<br />upper: 1.13<br />date: 2020-07-23","lower: 0.78<br />upper: 1.13<br />date: 2020-07-22","lower: 0.78<br />upper: 1.13<br />date: 2020-07-21","lower: 0.78<br />upper: 1.13<br />date: 2020-07-20","lower: 0.78<br />upper: 1.13<br />date: 2020-07-19","lower: 0.78<br />upper: 1.13<br />date: 2020-07-18","lower: 0.78<br />upper: 1.13<br />date: 2020-07-17","lower: 0.76<br />upper: 1.10<br />date: 2020-07-16","lower: 0.76<br />upper: 1.10<br />date: 2020-07-15","lower: 0.76<br />upper: 1.10<br />date: 2020-07-14","lower: 0.76<br />upper: 1.10<br />date: 2020-07-13","lower: 0.76<br />upper: 1.10<br />date: 2020-07-12","lower: 0.76<br />upper: 1.10<br />date: 2020-07-11","lower: 0.76<br />upper: 1.10<br />date: 2020-07-10","lower: 0.72<br />upper: 1.05<br />date: 2020-07-09","lower: 0.72<br />upper: 1.05<br />date: 2020-07-08","lower: 0.72<br />upper: 1.05<br />date: 2020-07-07","lower: 0.72<br />upper: 1.05<br />date: 2020-07-06","lower: 0.72<br />upper: 1.05<br />date: 2020-07-05","lower: 0.72<br />upper: 1.05<br />date: 2020-07-04","lower: 0.72<br />upper: 1.05<br />date: 2020-07-03","lower: 0.69<br />upper: 1.01<br />date: 2020-07-02","lower: 0.69<br />upper: 1.01<br />date: 2020-07-01","lower: 0.69<br />upper: 1.01<br />date: 2020-06-30","lower: 0.69<br />upper: 1.01<br />date: 2020-06-29","lower: 0.69<br />upper: 1.01<br />date: 2020-06-28","lower: 0.69<br />upper: 1.01<br />date: 2020-06-27","lower: 0.69<br />upper: 1.01<br />date: 2020-06-26","lower: 0.67<br />upper: 0.96<br />date: 2020-06-25","lower: 0.67<br />upper: 0.96<br />date: 2020-06-24","lower: 0.67<br />upper: 0.96<br />date: 2020-06-23","lower: 0.67<br />upper: 0.96<br />date: 2020-06-22","lower: 0.67<br />upper: 0.96<br />date: 2020-06-21","lower: 0.67<br />upper: 0.96<br />date: 2020-06-20","lower: 0.67<br />upper: 0.96<br />date: 2020-06-19","lower: 0.65<br />upper: 0.93<br />date: 2020-06-18","lower: 0.65<br />upper: 0.93<br />date: 2020-06-17","lower: 0.65<br />upper: 0.93<br />date: 2020-06-16","lower: 0.65<br />upper: 0.93<br />date: 2020-06-15","lower: 0.65<br />upper: 0.93<br />date: 2020-06-14","lower: 0.65<br />upper: 0.93<br />date: 2020-06-13","lower: 0.65<br />upper: 0.93<br />date: 2020-06-12","lower: 0.63<br />upper: 0.89<br />date: 2020-06-11","lower: 0.63<br />upper: 0.89<br />date: 2020-06-10","lower: 0.63<br />upper: 0.89<br />date: 2020-06-09","lower: 0.63<br />upper: 0.89<br />date: 2020-06-08","lower: 0.63<br />upper: 0.89<br />date: 2020-06-07","lower: 0.63<br />upper: 0.89<br />date: 2020-06-06","lower: 0.63<br />upper: 0.89<br />date: 2020-06-05","lower: 0.57<br />upper: 0.82<br />date: 2020-06-04","lower: 0.57<br />upper: 0.82<br />date: 2020-06-03","lower: 0.57<br />upper: 0.82<br />date: 2020-06-02","lower: 0.57<br />upper: 0.82<br />date: 2020-06-01","lower: 0.57<br />upper: 0.82<br />date: 2020-06-01"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(46,139,87,0.2941)","hoveron":"points","name":"90% CI","legendgroup":"90% CI","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[18414,18415,18416,18417,18418,18419,18420,18421,18422,18423,18424,18425,18426,18427,18428,18429,18430,18431,18432,18433,18434,18435,18436,18437,18438,18439,18440,18441,18442,18443,18444,18445,18446,18447,18448,18449,18450,18451,18452,18453,18454,18455,18456,18457,18458,18459,18460,18461,18462,18463,18464,18465,18466,18467,18468,18469,18470,18471,18472,18473,18474,18475,18476,18477,18478,18479,18480,18481,18482,18483,18484,18485,18486,18487,18488,18489,18490,18491,18492,18493,18494,18495,18496,18497,18498,18499,18500,18501,18502,18503,18504,18505,18506,18507,18508,18509,18510,18511,18512,18513,18514,18515,18516,18517,18518,18519,18520,18521,18522,18522,18521,18520,18519,18518,18517,18516,18515,18514,18513,18512,18511,18510,18509,18508,18507,18506,18505,18504,18503,18502,18501,18500,18499,18498,18497,18496,18495,18494,18493,18492,18491,18490,18489,18488,18487,18486,18485,18484,18483,18482,18481,18480,18479,18478,18477,18476,18475,18474,18473,18472,18471,18470,18469,18468,18467,18466,18465,18464,18463,18462,18461,18460,18459,18458,18457,18456,18455,18454,18453,18452,18451,18450,18449,18448,18447,18446,18445,18444,18443,18442,18441,18440,18439,18438,18437,18436,18435,18434,18433,18432,18431,18430,18429,18428,18427,18426,18425,18424,18423,18422,18421,18420,18419,18418,18417,18416,18415,18414,18414],"y":[0.637431350326534,0.637342361609694,0.637209866942697,0.637115329148418,0.682824925964565,0.682734564808566,0.682631559034086,0.682540342500179,0.68242744562806,0.682342336825221,0.682265074605972,0.707093971559995,0.706981843591913,0.706831717695537,0.706693642523175,0.706594392169733,0.70648017487928,0.706341594221379,0.72217489225875,0.722059655068126,0.722006672312929,0.72194367760719,0.721873385321426,0.721807966755577,0.721752808499542,0.749753902954819,0.749685018221159,0.749628255449836,0.749570388588724,0.749495978167358,0.749421283783553,0.749336812509506,0.789538390100948,0.78946801196371,0.789392182242119,0.789331067848152,0.789259791698259,0.789186806779014,0.789118823740528,0.821930496071806,0.821859952652361,0.821784239910636,0.821699221779205,0.82162976158975,0.821551885043881,0.821470301855747,0.848536542088342,0.848471836374198,0.848403216120517,0.848300771927922,0.848241546491501,0.848146391522548,0.848070069044419,0.866954511290548,0.866878208325984,0.866802470005511,0.866684626753697,0.86659411673911,0.866512019149809,0.86643511168874,0.881967355989784,0.881896506252215,0.881812712718231,0.881708392624921,0.881613234853822,0.881522398479476,0.881437175025926,0.883727533350822,0.883649434985407,0.883573509451078,0.88348375070891,0.883386877408732,0.883302574221707,0.883207394621614,0.871529295555593,0.871456432175929,0.871372942120297,0.871322409759435,0.871255457070289,0.871195131045479,0.871129896393412,0.882816338285758,0.8827072591541,0.882584046298985,0.882470207463559,0.882352112555143,0.882215842724434,0.882080213177929,0.882052820406302,0.882047389065584,0.882035713919429,0.882027157254211,0.882002469276403,0.881983144659419,0.881976418685577,0.881963765696088,0.88195924639767,0.881935409989164,0.881930887206112,0.881917318141875,0.88190824552164,0.881901150153803,0.881889485391256,0.881879753673493,0.881866979207751,0.881846659064174,0.881842711591012,0.881835186444666,0.881828948508448,1.16554775028775,1.16561311907582,1.16567011203737,1.16575377227541,1.16583925946625,1.16589926200505,1.16597031472116,1.16604707679618,1.16610962182364,1.16614861820991,1.16626227678974,1.16631367401848,1.16638125655291,1.1664287345259,1.16646725561818,1.16654604412602,1.16663592988849,1.16667337562578,1.16671620525852,1.16675764994354,1.16681629482429,1.16689243040737,1.16709411354222,1.16729618375022,1.16748835378176,1.16764696796098,1.16782288613511,1.16799288260819,1.15125353556868,1.15140589091079,1.15155935005237,1.15171842873384,1.15186514352448,1.15199871383607,1.15212964786177,1.12935763602718,1.12954076122401,1.12968507736446,1.12982338334393,1.12999042883619,1.13012498135724,1.13029057451798,1.09346278676511,1.09362137558546,1.09377387196888,1.09391464065032,1.09405586511703,1.09418708311893,1.09432356541335,1.06897038659137,1.06907961686209,1.06917790669688,1.06926696117368,1.06934949024494,1.06942924474808,1.0695179923345,1.02994534500444,1.03003730645294,1.03018601080292,1.03027631031195,1.03037322256458,1.0304899401917,1.03058776070988,0.992331630827122,0.99240245701168,0.99247132164796,0.992551049785364,0.992678120925188,0.992755918713586,0.992845250922532,0.944861553171116,0.944944017606641,0.945025583466642,0.945122834970701,0.945185254816946,0.945288327129667,0.945398771990583,0.900634378746747,0.900696817513093,0.900782335379376,0.90085622161142,0.900949548826,0.901011751648608,0.901092690684449,0.864767176698117,0.864844076359351,0.864954770330959,0.865011263100842,0.865222048954184,0.865294978247599,0.865362597997043,0.832066596333352,0.832163562976059,0.832265714260121,0.832352356195892,0.832444353427044,0.832552088777593,0.832660759470529,0.803618763254853,0.803734271764996,0.803866776640305,0.803976180621474,0.804103644400545,0.804216345019434,0.80432633063317,0.744193059796761,0.744315792880301,0.744425022122283,0.74453261349753,0.637431350326534],"text":["lower: 0.64<br />upper: 0.74<br />date: 2020-06-01","lower: 0.64<br />upper: 0.74<br />date: 2020-06-02","lower: 0.64<br />upper: 0.74<br />date: 2020-06-03","lower: 0.64<br />upper: 0.74<br />date: 2020-06-04","lower: 0.68<br />upper: 0.80<br />date: 2020-06-05","lower: 0.68<br />upper: 0.80<br />date: 2020-06-06","lower: 0.68<br />upper: 0.80<br />date: 2020-06-07","lower: 0.68<br />upper: 0.80<br />date: 2020-06-08","lower: 0.68<br />upper: 0.80<br />date: 2020-06-09","lower: 0.68<br />upper: 0.80<br />date: 2020-06-10","lower: 0.68<br />upper: 0.80<br />date: 2020-06-11","lower: 0.71<br />upper: 0.83<br />date: 2020-06-12","lower: 0.71<br />upper: 0.83<br />date: 2020-06-13","lower: 0.71<br />upper: 0.83<br />date: 2020-06-14","lower: 0.71<br />upper: 0.83<br />date: 2020-06-15","lower: 0.71<br />upper: 0.83<br />date: 2020-06-16","lower: 0.71<br />upper: 0.83<br />date: 2020-06-17","lower: 0.71<br />upper: 0.83<br />date: 2020-06-18","lower: 0.72<br />upper: 0.87<br />date: 2020-06-19","lower: 0.72<br />upper: 0.87<br />date: 2020-06-20","lower: 0.72<br />upper: 0.87<br />date: 2020-06-21","lower: 0.72<br />upper: 0.87<br />date: 2020-06-22","lower: 0.72<br />upper: 0.86<br />date: 2020-06-23","lower: 0.72<br />upper: 0.86<br />date: 2020-06-24","lower: 0.72<br />upper: 0.86<br />date: 2020-06-25","lower: 0.75<br />upper: 0.90<br />date: 2020-06-26","lower: 0.75<br />upper: 0.90<br />date: 2020-06-27","lower: 0.75<br />upper: 0.90<br />date: 2020-06-28","lower: 0.75<br />upper: 0.90<br />date: 2020-06-29","lower: 0.75<br />upper: 0.90<br />date: 2020-06-30","lower: 0.75<br />upper: 0.90<br />date: 2020-07-01","lower: 0.75<br />upper: 0.90<br />date: 2020-07-02","lower: 0.79<br />upper: 0.95<br />date: 2020-07-03","lower: 0.79<br />upper: 0.95<br />date: 2020-07-04","lower: 0.79<br />upper: 0.95<br />date: 2020-07-05","lower: 0.79<br />upper: 0.95<br />date: 2020-07-06","lower: 0.79<br />upper: 0.95<br />date: 2020-07-07","lower: 0.79<br />upper: 0.94<br />date: 2020-07-08","lower: 0.79<br />upper: 0.94<br />date: 2020-07-09","lower: 0.82<br />upper: 0.99<br />date: 2020-07-10","lower: 0.82<br />upper: 0.99<br />date: 2020-07-11","lower: 0.82<br />upper: 0.99<br />date: 2020-07-12","lower: 0.82<br />upper: 0.99<br />date: 2020-07-13","lower: 0.82<br />upper: 0.99<br />date: 2020-07-14","lower: 0.82<br />upper: 0.99<br />date: 2020-07-15","lower: 0.82<br />upper: 0.99<br />date: 2020-07-16","lower: 0.85<br />upper: 1.03<br />date: 2020-07-17","lower: 0.85<br />upper: 1.03<br />date: 2020-07-18","lower: 0.85<br />upper: 1.03<br />date: 2020-07-19","lower: 0.85<br />upper: 1.03<br />date: 2020-07-20","lower: 0.85<br />upper: 1.03<br />date: 2020-07-21","lower: 0.85<br />upper: 1.03<br />date: 2020-07-22","lower: 0.85<br />upper: 1.03<br />date: 2020-07-23","lower: 0.87<br />upper: 1.07<br />date: 2020-07-24","lower: 0.87<br />upper: 1.07<br />date: 2020-07-25","lower: 0.87<br />upper: 1.07<br />date: 2020-07-26","lower: 0.87<br />upper: 1.07<br />date: 2020-07-27","lower: 0.87<br />upper: 1.07<br />date: 2020-07-28","lower: 0.87<br />upper: 1.07<br />date: 2020-07-29","lower: 0.87<br />upper: 1.07<br />date: 2020-07-30","lower: 0.88<br />upper: 1.09<br />date: 2020-07-31","lower: 0.88<br />upper: 1.09<br />date: 2020-08-01","lower: 0.88<br />upper: 1.09<br />date: 2020-08-02","lower: 0.88<br />upper: 1.09<br />date: 2020-08-03","lower: 0.88<br />upper: 1.09<br />date: 2020-08-04","lower: 0.88<br />upper: 1.09<br />date: 2020-08-05","lower: 0.88<br />upper: 1.09<br />date: 2020-08-06","lower: 0.88<br />upper: 1.13<br />date: 2020-08-07","lower: 0.88<br />upper: 1.13<br />date: 2020-08-08","lower: 0.88<br />upper: 1.13<br />date: 2020-08-09","lower: 0.88<br />upper: 1.13<br />date: 2020-08-10","lower: 0.88<br />upper: 1.13<br />date: 2020-08-11","lower: 0.88<br />upper: 1.13<br />date: 2020-08-12","lower: 0.88<br />upper: 1.13<br />date: 2020-08-13","lower: 0.87<br />upper: 1.15<br />date: 2020-08-14","lower: 0.87<br />upper: 1.15<br />date: 2020-08-15","lower: 0.87<br />upper: 1.15<br />date: 2020-08-16","lower: 0.87<br />upper: 1.15<br />date: 2020-08-17","lower: 0.87<br />upper: 1.15<br />date: 2020-08-18","lower: 0.87<br />upper: 1.15<br />date: 2020-08-19","lower: 0.87<br />upper: 1.15<br />date: 2020-08-20","lower: 0.88<br />upper: 1.17<br />date: 2020-08-21","lower: 0.88<br />upper: 1.17<br />date: 2020-08-22","lower: 0.88<br />upper: 1.17<br />date: 2020-08-23","lower: 0.88<br />upper: 1.17<br />date: 2020-08-24","lower: 0.88<br />upper: 1.17<br />date: 2020-08-25","lower: 0.88<br />upper: 1.17<br />date: 2020-08-26","lower: 0.88<br />upper: 1.17<br />date: 2020-08-27","lower: 0.88<br />upper: 1.17<br />date: 2020-08-28","lower: 0.88<br />upper: 1.17<br />date: 2020-08-29","lower: 0.88<br />upper: 1.17<br />date: 2020-08-30","lower: 0.88<br />upper: 1.17<br />date: 2020-08-31","lower: 0.88<br />upper: 1.17<br />date: 2020-09-01","lower: 0.88<br />upper: 1.17<br />date: 2020-09-02","lower: 0.88<br />upper: 1.17<br />date: 2020-09-03","lower: 0.88<br />upper: 1.17<br />date: 2020-09-04","lower: 0.88<br />upper: 1.17<br />date: 2020-09-05","lower: 0.88<br />upper: 1.17<br />date: 2020-09-06","lower: 0.88<br />upper: 1.17<br />date: 2020-09-07","lower: 0.88<br />upper: 1.17<br />date: 2020-09-08","lower: 0.88<br />upper: 1.17<br />date: 2020-09-09","lower: 0.88<br />upper: 1.17<br />date: 2020-09-10","lower: 0.88<br />upper: 1.17<br />date: 2020-09-11","lower: 0.88<br />upper: 1.17<br />date: 2020-09-12","lower: 0.88<br />upper: 1.17<br />date: 2020-09-13","lower: 0.88<br />upper: 1.17<br />date: 2020-09-14","lower: 0.88<br />upper: 1.17<br />date: 2020-09-15","lower: 0.88<br />upper: 1.17<br />date: 2020-09-16","lower: 0.88<br />upper: 1.17<br />date: 2020-09-17","lower: 0.88<br />upper: 1.17<br />date: 2020-09-17","lower: 0.88<br />upper: 1.17<br />date: 2020-09-16","lower: 0.88<br />upper: 1.17<br />date: 2020-09-15","lower: 0.88<br />upper: 1.17<br />date: 2020-09-14","lower: 0.88<br />upper: 1.17<br />date: 2020-09-13","lower: 0.88<br />upper: 1.17<br />date: 2020-09-12","lower: 0.88<br />upper: 1.17<br />date: 2020-09-11","lower: 0.88<br />upper: 1.17<br />date: 2020-09-10","lower: 0.88<br />upper: 1.17<br />date: 2020-09-09","lower: 0.88<br />upper: 1.17<br />date: 2020-09-08","lower: 0.88<br />upper: 1.17<br />date: 2020-09-07","lower: 0.88<br />upper: 1.17<br />date: 2020-09-06","lower: 0.88<br />upper: 1.17<br />date: 2020-09-05","lower: 0.88<br />upper: 1.17<br />date: 2020-09-04","lower: 0.88<br />upper: 1.17<br />date: 2020-09-03","lower: 0.88<br />upper: 1.17<br />date: 2020-09-02","lower: 0.88<br />upper: 1.17<br />date: 2020-09-01","lower: 0.88<br />upper: 1.17<br />date: 2020-08-31","lower: 0.88<br />upper: 1.17<br />date: 2020-08-30","lower: 0.88<br />upper: 1.17<br />date: 2020-08-29","lower: 0.88<br />upper: 1.17<br />date: 2020-08-28","lower: 0.88<br />upper: 1.17<br />date: 2020-08-27","lower: 0.88<br />upper: 1.17<br />date: 2020-08-26","lower: 0.88<br />upper: 1.17<br />date: 2020-08-25","lower: 0.88<br />upper: 1.17<br />date: 2020-08-24","lower: 0.88<br />upper: 1.17<br />date: 2020-08-23","lower: 0.88<br />upper: 1.17<br />date: 2020-08-22","lower: 0.88<br />upper: 1.17<br />date: 2020-08-21","lower: 0.87<br />upper: 1.15<br />date: 2020-08-20","lower: 0.87<br />upper: 1.15<br />date: 2020-08-19","lower: 0.87<br />upper: 1.15<br />date: 2020-08-18","lower: 0.87<br />upper: 1.15<br />date: 2020-08-17","lower: 0.87<br />upper: 1.15<br />date: 2020-08-16","lower: 0.87<br />upper: 1.15<br />date: 2020-08-15","lower: 0.87<br />upper: 1.15<br />date: 2020-08-14","lower: 0.88<br />upper: 1.13<br />date: 2020-08-13","lower: 0.88<br />upper: 1.13<br />date: 2020-08-12","lower: 0.88<br />upper: 1.13<br />date: 2020-08-11","lower: 0.88<br />upper: 1.13<br />date: 2020-08-10","lower: 0.88<br />upper: 1.13<br />date: 2020-08-09","lower: 0.88<br />upper: 1.13<br />date: 2020-08-08","lower: 0.88<br />upper: 1.13<br />date: 2020-08-07","lower: 0.88<br />upper: 1.09<br />date: 2020-08-06","lower: 0.88<br />upper: 1.09<br />date: 2020-08-05","lower: 0.88<br />upper: 1.09<br />date: 2020-08-04","lower: 0.88<br />upper: 1.09<br />date: 2020-08-03","lower: 0.88<br />upper: 1.09<br />date: 2020-08-02","lower: 0.88<br />upper: 1.09<br />date: 2020-08-01","lower: 0.88<br />upper: 1.09<br />date: 2020-07-31","lower: 0.87<br />upper: 1.07<br />date: 2020-07-30","lower: 0.87<br />upper: 1.07<br />date: 2020-07-29","lower: 0.87<br />upper: 1.07<br />date: 2020-07-28","lower: 0.87<br />upper: 1.07<br />date: 2020-07-27","lower: 0.87<br />upper: 1.07<br />date: 2020-07-26","lower: 0.87<br />upper: 1.07<br />date: 2020-07-25","lower: 0.87<br />upper: 1.07<br />date: 2020-07-24","lower: 0.85<br />upper: 1.03<br />date: 2020-07-23","lower: 0.85<br />upper: 1.03<br />date: 2020-07-22","lower: 0.85<br />upper: 1.03<br />date: 2020-07-21","lower: 0.85<br />upper: 1.03<br />date: 2020-07-20","lower: 0.85<br />upper: 1.03<br />date: 2020-07-19","lower: 0.85<br />upper: 1.03<br />date: 2020-07-18","lower: 0.85<br />upper: 1.03<br />date: 2020-07-17","lower: 0.82<br />upper: 0.99<br />date: 2020-07-16","lower: 0.82<br />upper: 0.99<br />date: 2020-07-15","lower: 0.82<br />upper: 0.99<br />date: 2020-07-14","lower: 0.82<br />upper: 0.99<br />date: 2020-07-13","lower: 0.82<br />upper: 0.99<br />date: 2020-07-12","lower: 0.82<br />upper: 0.99<br />date: 2020-07-11","lower: 0.82<br />upper: 0.99<br />date: 2020-07-10","lower: 0.79<br />upper: 0.94<br />date: 2020-07-09","lower: 0.79<br />upper: 0.94<br />date: 2020-07-08","lower: 0.79<br />upper: 0.95<br />date: 2020-07-07","lower: 0.79<br />upper: 0.95<br />date: 2020-07-06","lower: 0.79<br />upper: 0.95<br />date: 2020-07-05","lower: 0.79<br />upper: 0.95<br />date: 2020-07-04","lower: 0.79<br />upper: 0.95<br />date: 2020-07-03","lower: 0.75<br />upper: 0.90<br />date: 2020-07-02","lower: 0.75<br />upper: 0.90<br />date: 2020-07-01","lower: 0.75<br />upper: 0.90<br />date: 2020-06-30","lower: 0.75<br />upper: 0.90<br />date: 2020-06-29","lower: 0.75<br />upper: 0.90<br />date: 2020-06-28","lower: 0.75<br />upper: 0.90<br />date: 2020-06-27","lower: 0.75<br />upper: 0.90<br />date: 2020-06-26","lower: 0.72<br />upper: 0.86<br />date: 2020-06-25","lower: 0.72<br />upper: 0.86<br />date: 2020-06-24","lower: 0.72<br />upper: 0.86<br />date: 2020-06-23","lower: 0.72<br />upper: 0.87<br />date: 2020-06-22","lower: 0.72<br />upper: 0.87<br />date: 2020-06-21","lower: 0.72<br />upper: 0.87<br />date: 2020-06-20","lower: 0.72<br />upper: 0.87<br />date: 2020-06-19","lower: 0.71<br />upper: 0.83<br />date: 2020-06-18","lower: 0.71<br />upper: 0.83<br />date: 2020-06-17","lower: 0.71<br />upper: 0.83<br />date: 2020-06-16","lower: 0.71<br />upper: 0.83<br />date: 2020-06-15","lower: 0.71<br />upper: 0.83<br />date: 2020-06-14","lower: 0.71<br />upper: 0.83<br />date: 2020-06-13","lower: 0.71<br />upper: 0.83<br />date: 2020-06-12","lower: 0.68<br />upper: 0.80<br />date: 2020-06-11","lower: 0.68<br />upper: 0.80<br />date: 2020-06-10","lower: 0.68<br />upper: 0.80<br />date: 2020-06-09","lower: 0.68<br />upper: 0.80<br />date: 2020-06-08","lower: 0.68<br />upper: 0.80<br />date: 2020-06-07","lower: 0.68<br />upper: 0.80<br />date: 2020-06-06","lower: 0.68<br />upper: 0.80<br />date: 2020-06-05","lower: 0.64<br />upper: 0.74<br />date: 2020-06-04","lower: 0.64<br />upper: 0.74<br />date: 2020-06-03","lower: 0.64<br />upper: 0.74<br />date: 2020-06-02","lower: 0.64<br />upper: 0.74<br />date: 2020-06-01","lower: 0.64<br />upper: 0.74<br />date: 2020-06-01"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(46,139,87,0.6)","hoveron":"points","name":"60% CI","legendgroup":"60% CI","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[18414,18415,18416,18417,18418,18419,18420,18421,18422,18423,18424,18425,18426,18427,18428,18429,18430,18431,18432,18433,18434,18435,18436,18437,18438,18439,18440,18441,18442,18443,18444,18445,18446,18447,18448,18449,18450,18451,18452,18453,18454,18455,18456,18457,18458,18459,18460,18461,18462,18463,18464,18465,18466,18467,18468,18469,18470,18471,18472,18473,18474,18475,18476,18477,18478,18479,18480,18481,18482,18483,18484,18485,18486,18487,18488,18489,18490,18491,18492,18493,18494,18495,18496,18497,18498,18499,18500,18501,18502,18503,18504,18505,18506,18507,18508,18509,18510,18511,18512,18513,18514,18515,18516,18517,18518,18519,18520,18521,18522,18522,18522,18521,18520,18519,18518,18517,18516,18515,18514,18513,18512,18511,18510,18509,18508,18507,18506,18505,18504,18503,18502,18501,18500,18499,18498,18497,18496,18495,18494,18493,18492,18491,18490,18489,18488,18487,18486,18485,18484,18483,18482,18481,18480,18479,18478,18477,18476,18475,18474,18473,18472,18471,18470,18469,18468,18467,18466,18465,18464,18463,18462,18461,18460,18459,18458,18457,18456,18455,18454,18453,18452,18451,18450,18449,18448,18447,18446,18445,18444,18443,18442,18441,18440,18439,18438,18437,18436,18435,18434,18433,18432,18431,18430,18429,18428,18427,18426,18425,18424,18423,18422,18421,18420,18419,18418,18417,18416,18415,18414,18414],"y":[0.664249728940686,0.664121441237368,0.664024077806974,0.663913755545992,0.714766199786585,0.714651122858587,0.714533326490739,0.714418286084313,0.714306432948456,0.714210346383179,0.714070153012614,0.734016848410665,0.733930629057115,0.733853086320001,0.733756117817777,0.733681682339962,0.733600662652476,0.733491309639209,0.757588452033119,0.757504252459312,0.757413552915311,0.757345847854519,0.757284991477973,0.757226966865175,0.75716004072707,0.783624223337963,0.783557933397355,0.783487389836247,0.783429399818489,0.783349185174643,0.783295587445682,0.783201261940349,0.825595746219979,0.825515192080201,0.82543583216612,0.825374165940729,0.82531386281993,0.825247524984034,0.825176175704711,0.864467129688455,0.864389613739687,0.864320236184899,0.864210383025612,0.86412312312783,0.864039643247507,0.863957589848785,0.893581703192275,0.893449454220346,0.893316307018728,0.893242221068993,0.893141272760357,0.893047434126436,0.892945501505146,0.916488795552953,0.916388431661892,0.916310302096423,0.916230224206855,0.916153251831607,0.916093949005228,0.916013493255543,0.942026628206964,0.941951494416138,0.941800831337835,0.941707388193048,0.941613064224511,0.941506238500313,0.941404511862764,0.946646193808566,0.946541558734204,0.946441776236145,0.946320753123961,0.946219563873738,0.946115900996292,0.946015642140639,0.942884214438714,0.942759428695161,0.94262180970655,0.942502973570345,0.942375573694253,0.942240938968407,0.942110062300564,0.956670731414449,0.956511946474577,0.956335672985814,0.956171595124949,0.955983498498744,0.95578412256793,0.955525054792131,0.95547742593114,0.955427228981279,0.955382092950299,0.955354673116145,0.955323950782786,0.955232874891949,0.955202736144553,0.955167081819077,0.955118976585257,0.955056745902185,0.95501108996086,0.954981219833887,0.954933467754157,0.954898539781173,0.954814029557289,0.954781816974791,0.954735237808322,0.954686395282986,0.954657572918843,0.954604884040233,0.954530956130821,0.954530956130821,1.07715952610907,1.07726592468791,1.07749199905055,1.0775951190027,1.07770322402735,1.07779989623136,1.07792772812641,1.07804664408327,1.07813872585059,1.07826632301813,1.07836755561359,1.07847999236095,1.07856979108049,1.07866492733607,1.07876895827044,1.07892012661777,1.07899910716839,1.07909926769504,1.07917100619935,1.07925655311239,1.07933051906143,1.0794224406272,1.07964980314439,1.0798569039106,1.08006384818374,1.08024391124391,1.08047044724308,1.08066270251619,1.06398845470977,1.06413098974487,1.06437569531941,1.06453745650597,1.0646729115491,1.06484334382111,1.06497541481228,1.05734594357591,1.05745182247547,1.057546725577,1.05765059343758,1.05774254084056,1.05785293943933,1.05793872438197,1.03434879018117,1.0344523934252,1.03456590932461,1.03467217779902,1.03476906785059,1.03486962469777,1.0349704324163,1.00356098775662,1.00368931611988,1.00380163740707,1.00390606091694,1.0040331773586,1.00414033110968,1.00429514884876,0.971851796064622,0.971946156499724,0.972028942202652,0.972109681070916,0.972198147084247,0.972280225096848,0.972359659133924,0.934071038504031,0.934131970517032,0.934218446021126,0.934352859042025,0.934425032039163,0.934486940064078,0.934554227905071,0.894439948787678,0.894511209708633,0.894580635719494,0.894645700798774,0.894721808540153,0.894785346918733,0.894872737102771,0.846785134633669,0.846888703253649,0.846967250499821,0.847059122193067,0.847140610914233,0.847260174224982,0.847373128258653,0.819886163404054,0.819937716946753,0.820027326668761,0.820086199094792,0.82016192827628,0.820217135036252,0.820290462072837,0.793395037422754,0.793520980654939,0.793631372380584,0.793766476299651,0.793908598970811,0.794036010993115,0.79415005847884,0.767100561984673,0.767202222660573,0.767319634399281,0.767466699486111,0.767620879562635,0.767764236850815,0.76789233057011,0.71274015956166,0.712847010590049,0.712968865360608,0.713120192879251,0.664249728940686],"text":["lower: 0.66<br />upper: 0.71<br />date: 2020-06-01","lower: 0.66<br />upper: 0.71<br />date: 2020-06-02","lower: 0.66<br />upper: 0.71<br />date: 2020-06-03","lower: 0.66<br />upper: 0.71<br />date: 2020-06-04","lower: 0.71<br />upper: 0.77<br />date: 2020-06-05","lower: 0.71<br />upper: 0.77<br />date: 2020-06-06","lower: 0.71<br />upper: 0.77<br />date: 2020-06-07","lower: 0.71<br />upper: 0.77<br />date: 2020-06-08","lower: 0.71<br />upper: 0.77<br />date: 2020-06-09","lower: 0.71<br />upper: 0.77<br />date: 2020-06-10","lower: 0.71<br />upper: 0.77<br />date: 2020-06-11","lower: 0.73<br />upper: 0.79<br />date: 2020-06-12","lower: 0.73<br />upper: 0.79<br />date: 2020-06-13","lower: 0.73<br />upper: 0.79<br />date: 2020-06-14","lower: 0.73<br />upper: 0.79<br />date: 2020-06-15","lower: 0.73<br />upper: 0.79<br />date: 2020-06-16","lower: 0.73<br />upper: 0.79<br />date: 2020-06-17","lower: 0.73<br />upper: 0.79<br />date: 2020-06-18","lower: 0.76<br />upper: 0.82<br />date: 2020-06-19","lower: 0.76<br />upper: 0.82<br />date: 2020-06-20","lower: 0.76<br />upper: 0.82<br />date: 2020-06-21","lower: 0.76<br />upper: 0.82<br />date: 2020-06-22","lower: 0.76<br />upper: 0.82<br />date: 2020-06-23","lower: 0.76<br />upper: 0.82<br />date: 2020-06-24","lower: 0.76<br />upper: 0.82<br />date: 2020-06-25","lower: 0.78<br />upper: 0.85<br />date: 2020-06-26","lower: 0.78<br />upper: 0.85<br />date: 2020-06-27","lower: 0.78<br />upper: 0.85<br />date: 2020-06-28","lower: 0.78<br />upper: 0.85<br />date: 2020-06-29","lower: 0.78<br />upper: 0.85<br />date: 2020-06-30","lower: 0.78<br />upper: 0.85<br />date: 2020-07-01","lower: 0.78<br />upper: 0.85<br />date: 2020-07-02","lower: 0.83<br />upper: 0.89<br />date: 2020-07-03","lower: 0.83<br />upper: 0.89<br />date: 2020-07-04","lower: 0.83<br />upper: 0.89<br />date: 2020-07-05","lower: 0.83<br />upper: 0.89<br />date: 2020-07-06","lower: 0.83<br />upper: 0.89<br />date: 2020-07-07","lower: 0.83<br />upper: 0.89<br />date: 2020-07-08","lower: 0.83<br />upper: 0.89<br />date: 2020-07-09","lower: 0.86<br />upper: 0.93<br />date: 2020-07-10","lower: 0.86<br />upper: 0.93<br />date: 2020-07-11","lower: 0.86<br />upper: 0.93<br />date: 2020-07-12","lower: 0.86<br />upper: 0.93<br />date: 2020-07-13","lower: 0.86<br />upper: 0.93<br />date: 2020-07-14","lower: 0.86<br />upper: 0.93<br />date: 2020-07-15","lower: 0.86<br />upper: 0.93<br />date: 2020-07-16","lower: 0.89<br />upper: 0.97<br />date: 2020-07-17","lower: 0.89<br />upper: 0.97<br />date: 2020-07-18","lower: 0.89<br />upper: 0.97<br />date: 2020-07-19","lower: 0.89<br />upper: 0.97<br />date: 2020-07-20","lower: 0.89<br />upper: 0.97<br />date: 2020-07-21","lower: 0.89<br />upper: 0.97<br />date: 2020-07-22","lower: 0.89<br />upper: 0.97<br />date: 2020-07-23","lower: 0.92<br />upper: 1.00<br />date: 2020-07-24","lower: 0.92<br />upper: 1.00<br />date: 2020-07-25","lower: 0.92<br />upper: 1.00<br />date: 2020-07-26","lower: 0.92<br />upper: 1.00<br />date: 2020-07-27","lower: 0.92<br />upper: 1.00<br />date: 2020-07-28","lower: 0.92<br />upper: 1.00<br />date: 2020-07-29","lower: 0.92<br />upper: 1.00<br />date: 2020-07-30","lower: 0.94<br />upper: 1.03<br />date: 2020-07-31","lower: 0.94<br />upper: 1.03<br />date: 2020-08-01","lower: 0.94<br />upper: 1.03<br />date: 2020-08-02","lower: 0.94<br />upper: 1.03<br />date: 2020-08-03","lower: 0.94<br />upper: 1.03<br />date: 2020-08-04","lower: 0.94<br />upper: 1.03<br />date: 2020-08-05","lower: 0.94<br />upper: 1.03<br />date: 2020-08-06","lower: 0.95<br />upper: 1.06<br />date: 2020-08-07","lower: 0.95<br />upper: 1.06<br />date: 2020-08-08","lower: 0.95<br />upper: 1.06<br />date: 2020-08-09","lower: 0.95<br />upper: 1.06<br />date: 2020-08-10","lower: 0.95<br />upper: 1.06<br />date: 2020-08-11","lower: 0.95<br />upper: 1.06<br />date: 2020-08-12","lower: 0.95<br />upper: 1.06<br />date: 2020-08-13","lower: 0.94<br />upper: 1.06<br />date: 2020-08-14","lower: 0.94<br />upper: 1.06<br />date: 2020-08-15","lower: 0.94<br />upper: 1.06<br />date: 2020-08-16","lower: 0.94<br />upper: 1.06<br />date: 2020-08-17","lower: 0.94<br />upper: 1.06<br />date: 2020-08-18","lower: 0.94<br />upper: 1.06<br />date: 2020-08-19","lower: 0.94<br />upper: 1.06<br />date: 2020-08-20","lower: 0.96<br />upper: 1.08<br />date: 2020-08-21","lower: 0.96<br />upper: 1.08<br />date: 2020-08-22","lower: 0.96<br />upper: 1.08<br />date: 2020-08-23","lower: 0.96<br />upper: 1.08<br />date: 2020-08-24","lower: 0.96<br />upper: 1.08<br />date: 2020-08-25","lower: 0.96<br />upper: 1.08<br />date: 2020-08-26","lower: 0.96<br />upper: 1.08<br />date: 2020-08-27","lower: 0.96<br />upper: 1.08<br />date: 2020-08-28","lower: 0.96<br />upper: 1.08<br />date: 2020-08-29","lower: 0.96<br />upper: 1.08<br />date: 2020-08-30","lower: 0.96<br />upper: 1.08<br />date: 2020-08-31","lower: 0.96<br />upper: 1.08<br />date: 2020-09-01","lower: 0.96<br />upper: 1.08<br />date: 2020-09-02","lower: 0.96<br />upper: 1.08<br />date: 2020-09-03","lower: 0.96<br />upper: 1.08<br />date: 2020-09-04","lower: 0.96<br />upper: 1.08<br />date: 2020-09-05","lower: 0.96<br />upper: 1.08<br />date: 2020-09-06","lower: 0.96<br />upper: 1.08<br />date: 2020-09-07","lower: 0.95<br />upper: 1.08<br />date: 2020-09-08","lower: 0.95<br />upper: 1.08<br />date: 2020-09-09","lower: 0.95<br />upper: 1.08<br />date: 2020-09-10","lower: 0.95<br />upper: 1.08<br />date: 2020-09-11","lower: 0.95<br />upper: 1.08<br />date: 2020-09-12","lower: 0.95<br />upper: 1.08<br />date: 2020-09-13","lower: 0.95<br />upper: 1.08<br />date: 2020-09-14","lower: 0.95<br />upper: 1.08<br />date: 2020-09-15","lower: 0.95<br />upper: 1.08<br />date: 2020-09-16","lower: 0.95<br />upper: 1.08<br />date: 2020-09-17","lower: 0.95<br />upper: 1.08<br />date: 2020-09-17","lower: 0.95<br />upper: 1.08<br />date: 2020-09-17","lower: 0.95<br />upper: 1.08<br />date: 2020-09-16","lower: 0.95<br />upper: 1.08<br />date: 2020-09-15","lower: 0.95<br />upper: 1.08<br />date: 2020-09-14","lower: 0.95<br />upper: 1.08<br />date: 2020-09-13","lower: 0.95<br />upper: 1.08<br />date: 2020-09-12","lower: 0.95<br />upper: 1.08<br />date: 2020-09-11","lower: 0.95<br />upper: 1.08<br />date: 2020-09-10","lower: 0.95<br />upper: 1.08<br />date: 2020-09-09","lower: 0.95<br />upper: 1.08<br />date: 2020-09-08","lower: 0.96<br />upper: 1.08<br />date: 2020-09-07","lower: 0.96<br />upper: 1.08<br />date: 2020-09-06","lower: 0.96<br />upper: 1.08<br />date: 2020-09-05","lower: 0.96<br />upper: 1.08<br />date: 2020-09-04","lower: 0.96<br />upper: 1.08<br />date: 2020-09-03","lower: 0.96<br />upper: 1.08<br />date: 2020-09-02","lower: 0.96<br />upper: 1.08<br />date: 2020-09-01","lower: 0.96<br />upper: 1.08<br />date: 2020-08-31","lower: 0.96<br />upper: 1.08<br />date: 2020-08-30","lower: 0.96<br />upper: 1.08<br />date: 2020-08-29","lower: 0.96<br />upper: 1.08<br />date: 2020-08-28","lower: 0.96<br />upper: 1.08<br />date: 2020-08-27","lower: 0.96<br />upper: 1.08<br />date: 2020-08-26","lower: 0.96<br />upper: 1.08<br />date: 2020-08-25","lower: 0.96<br />upper: 1.08<br />date: 2020-08-24","lower: 0.96<br />upper: 1.08<br />date: 2020-08-23","lower: 0.96<br />upper: 1.08<br />date: 2020-08-22","lower: 0.96<br />upper: 1.08<br />date: 2020-08-21","lower: 0.94<br />upper: 1.06<br />date: 2020-08-20","lower: 0.94<br />upper: 1.06<br />date: 2020-08-19","lower: 0.94<br />upper: 1.06<br />date: 2020-08-18","lower: 0.94<br />upper: 1.06<br />date: 2020-08-17","lower: 0.94<br />upper: 1.06<br />date: 2020-08-16","lower: 0.94<br />upper: 1.06<br />date: 2020-08-15","lower: 0.94<br />upper: 1.06<br />date: 2020-08-14","lower: 0.95<br />upper: 1.06<br />date: 2020-08-13","lower: 0.95<br />upper: 1.06<br />date: 2020-08-12","lower: 0.95<br />upper: 1.06<br />date: 2020-08-11","lower: 0.95<br />upper: 1.06<br />date: 2020-08-10","lower: 0.95<br />upper: 1.06<br />date: 2020-08-09","lower: 0.95<br />upper: 1.06<br />date: 2020-08-08","lower: 0.95<br />upper: 1.06<br />date: 2020-08-07","lower: 0.94<br />upper: 1.03<br />date: 2020-08-06","lower: 0.94<br />upper: 1.03<br />date: 2020-08-05","lower: 0.94<br />upper: 1.03<br />date: 2020-08-04","lower: 0.94<br />upper: 1.03<br />date: 2020-08-03","lower: 0.94<br />upper: 1.03<br />date: 2020-08-02","lower: 0.94<br />upper: 1.03<br />date: 2020-08-01","lower: 0.94<br />upper: 1.03<br />date: 2020-07-31","lower: 0.92<br />upper: 1.00<br />date: 2020-07-30","lower: 0.92<br />upper: 1.00<br />date: 2020-07-29","lower: 0.92<br />upper: 1.00<br />date: 2020-07-28","lower: 0.92<br />upper: 1.00<br />date: 2020-07-27","lower: 0.92<br />upper: 1.00<br />date: 2020-07-26","lower: 0.92<br />upper: 1.00<br />date: 2020-07-25","lower: 0.92<br />upper: 1.00<br />date: 2020-07-24","lower: 0.89<br />upper: 0.97<br />date: 2020-07-23","lower: 0.89<br />upper: 0.97<br />date: 2020-07-22","lower: 0.89<br />upper: 0.97<br />date: 2020-07-21","lower: 0.89<br />upper: 0.97<br />date: 2020-07-20","lower: 0.89<br />upper: 0.97<br />date: 2020-07-19","lower: 0.89<br />upper: 0.97<br />date: 2020-07-18","lower: 0.89<br />upper: 0.97<br />date: 2020-07-17","lower: 0.86<br />upper: 0.93<br />date: 2020-07-16","lower: 0.86<br />upper: 0.93<br />date: 2020-07-15","lower: 0.86<br />upper: 0.93<br />date: 2020-07-14","lower: 0.86<br />upper: 0.93<br />date: 2020-07-13","lower: 0.86<br />upper: 0.93<br />date: 2020-07-12","lower: 0.86<br />upper: 0.93<br />date: 2020-07-11","lower: 0.86<br />upper: 0.93<br />date: 2020-07-10","lower: 0.83<br />upper: 0.89<br />date: 2020-07-09","lower: 0.83<br />upper: 0.89<br />date: 2020-07-08","lower: 0.83<br />upper: 0.89<br />date: 2020-07-07","lower: 0.83<br />upper: 0.89<br />date: 2020-07-06","lower: 0.83<br />upper: 0.89<br />date: 2020-07-05","lower: 0.83<br />upper: 0.89<br />date: 2020-07-04","lower: 0.83<br />upper: 0.89<br />date: 2020-07-03","lower: 0.78<br />upper: 0.85<br />date: 2020-07-02","lower: 0.78<br />upper: 0.85<br />date: 2020-07-01","lower: 0.78<br />upper: 0.85<br />date: 2020-06-30","lower: 0.78<br />upper: 0.85<br />date: 2020-06-29","lower: 0.78<br />upper: 0.85<br />date: 2020-06-28","lower: 0.78<br />upper: 0.85<br />date: 2020-06-27","lower: 0.78<br />upper: 0.85<br />date: 2020-06-26","lower: 0.76<br />upper: 0.82<br />date: 2020-06-25","lower: 0.76<br />upper: 0.82<br />date: 2020-06-24","lower: 0.76<br />upper: 0.82<br />date: 2020-06-23","lower: 0.76<br />upper: 0.82<br />date: 2020-06-22","lower: 0.76<br />upper: 0.82<br />date: 2020-06-21","lower: 0.76<br />upper: 0.82<br />date: 2020-06-20","lower: 0.76<br />upper: 0.82<br />date: 2020-06-19","lower: 0.73<br />upper: 0.79<br />date: 2020-06-18","lower: 0.73<br />upper: 0.79<br />date: 2020-06-17","lower: 0.73<br />upper: 0.79<br />date: 2020-06-16","lower: 0.73<br />upper: 0.79<br />date: 2020-06-15","lower: 0.73<br />upper: 0.79<br />date: 2020-06-14","lower: 0.73<br />upper: 0.79<br />date: 2020-06-13","lower: 0.73<br />upper: 0.79<br />date: 2020-06-12","lower: 0.71<br />upper: 0.77<br />date: 2020-06-11","lower: 0.71<br />upper: 0.77<br />date: 2020-06-10","lower: 0.71<br />upper: 0.77<br />date: 2020-06-09","lower: 0.71<br />upper: 0.77<br />date: 2020-06-08","lower: 0.71<br />upper: 0.77<br />date: 2020-06-07","lower: 0.71<br />upper: 0.77<br />date: 2020-06-06","lower: 0.71<br />upper: 0.77<br />date: 2020-06-05","lower: 0.66<br />upper: 0.71<br />date: 2020-06-04","lower: 0.66<br />upper: 0.71<br />date: 2020-06-03","lower: 0.66<br />upper: 0.71<br />date: 2020-06-02","lower: 0.66<br />upper: 0.71<br />date: 2020-06-01","lower: 0.66<br />upper: 0.71<br />date: 2020-06-01"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(46,139,87,0.902)","hoveron":"points","name":"30% CI","legendgroup":"30% CI","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[18408.6,18527.4],"y":[1,1],"text":"","type":"scatter","mode":"lines","line":{"width":2.64566929133858,"color":"rgba(0,0,0,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[18501,18501],"y":[0,1.51321558175918],"text":"","type":"scatter","mode":"lines","line":{"width":3.77952755905512,"color":"rgba(0,0,0,1)","dash":"dot"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":30,"r":0,"b":60,"l":40,"pad":0,"autoexpand":false},"plot_bgcolor":"rgba(255,255,255,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[18408.6,18527.4],"tickmode":"array","ticktext":[" 8 Jun","22 Jun"," 6 Jul","20 Jul"," 3 Aug","17 Aug","31 Aug","14 Sep"],"tickvals":[18421,18435,18449,18463,18477,18491,18505,18519],"categoryorder":"array","categoryarray":[" 8 Jun","22 Jun"," 6 Jul","20 Jul"," 3 Aug","17 Aug","31 Aug","14 Sep"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":15.9402241594022},"tickangle":-45,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":"","hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0,1.51321558175918],"tickmode":"array","ticktext":["0.00","0.50","1.00","1.50"],"tickvals":[0,0.5,1,1.5],"categoryorder":"array","categoryarray":["0.00","0.50","1.00","1.50"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":15.9402241594022},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":"","hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":"transparent","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":23.37899543379,"yanchor":1,"ysizemode":"pixel"}],"annotations":[{"text":"Lichfield","x":0.5,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"y":1,"title":{"text":"R<sub>t<\/sub>"},"x":0},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"a2dd73803501":{"ymin":{},"ymax":{},"fill":{},"x":{},"type":"scatter"},"a2dd63188cab":{"yintercept":{}},"a2dd77e71138":{"xintercept":{}}},"cur_data":"a2dd73803501","visdat":{"a2dd73803501":["function (y) ","x"],"a2dd63188cab":["function (y) ","x"],"a2dd77e71138":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<blockquote>
+<p>Time-Varying Reproduction Number R<sub>t</sub> with uncertainty bands. Vertical line: last day of data included in the model (2020-08-27).</p>
+</blockquote>
+</div>
+<div id="weekly-cases-per-100k" class="section level3">
+<h3>Weekly Cases per 100k</h3>
+<div class="knitr-options" data-fig-width="576" data-fig-height="460">
+
+</div>
+<div id="htmlwidget-edca42404d5f5a8df2c9" style="width:576px;height:460.8px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-edca42404d5f5a8df2c9">{"x":{"data":[{"x":[18417,18424,18431,18438,18445,18452,18459,18466,18473,18480,18487,18494,18501,18508,18515,18522,18522,18515,18508,18501,18494,18487,18480,18473,18466,18459,18452,18445,18438,18431,18424,18417,18417],"y":[6.73303515606214,2.8855864954552,1.92372433030347,0.961862165151734,0,0,0,0,0,0,0,0,0,0,0,0,32.7033136151589,26.9321406242485,24.0465541287933,18.2753811378829,15.3897946424277,16.3516568075795,16.3516568075795,15.3897946424277,17.3135189727312,17.3135189727312,18.2753811378829,20.1991054681864,23.9984610205357,26.9321406242485,33.617082672053,43.283797431828,6.73303515606214],"text":["lower:  6.73<br />upper: 43.3<br />date: 2020-06-04","lower:  2.89<br />upper: 33.6<br />date: 2020-06-11","lower:  1.92<br />upper: 26.9<br />date: 2020-06-18","lower:  0.96<br />upper: 24.0<br />date: 2020-06-25","lower:  0.00<br />upper: 20.2<br />date: 2020-07-02","lower:  0.00<br />upper: 18.3<br />date: 2020-07-09","lower:  0.00<br />upper: 17.3<br />date: 2020-07-16","lower:  0.00<br />upper: 17.3<br />date: 2020-07-23","lower:  0.00<br />upper: 15.4<br />date: 2020-07-30","lower:  0.00<br />upper: 16.4<br />date: 2020-08-06","lower:  0.00<br />upper: 16.4<br />date: 2020-08-13","lower:  0.00<br />upper: 15.4<br />date: 2020-08-20","lower:  0.00<br />upper: 18.3<br />date: 2020-08-27","lower:  0.00<br />upper: 24.0<br />date: 2020-09-03","lower:  0.00<br />upper: 26.9<br />date: 2020-09-10","lower:  0.00<br />upper: 32.7<br />date: 2020-09-17","lower:  0.00<br />upper: 32.7<br />date: 2020-09-17","lower:  0.00<br />upper: 26.9<br />date: 2020-09-10","lower:  0.00<br />upper: 24.0<br />date: 2020-09-03","lower:  0.00<br />upper: 18.3<br />date: 2020-08-27","lower:  0.00<br />upper: 15.4<br />date: 2020-08-20","lower:  0.00<br />upper: 16.4<br />date: 2020-08-13","lower:  0.00<br />upper: 16.4<br />date: 2020-08-06","lower:  0.00<br />upper: 15.4<br />date: 2020-07-30","lower:  0.00<br />upper: 17.3<br />date: 2020-07-23","lower:  0.00<br />upper: 17.3<br />date: 2020-07-16","lower:  0.00<br />upper: 18.3<br />date: 2020-07-09","lower:  0.00<br />upper: 20.2<br />date: 2020-07-02","lower:  0.96<br />upper: 24.0<br />date: 2020-06-25","lower:  1.92<br />upper: 26.9<br />date: 2020-06-18","lower:  2.89<br />upper: 33.6<br />date: 2020-06-11","lower:  6.73<br />upper: 43.3<br />date: 2020-06-04","lower:  6.73<br />upper: 43.3<br />date: 2020-06-04"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(0,104,139,0.1451)","hoveron":"points","name":"90% CI","legendgroup":"90% CI","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[18417,18424,18431,18438,18445,18452,18459,18466,18473,18480,18487,18494,18501,18508,18515,18522,18522,18515,18508,18501,18494,18487,18480,18473,18466,18459,18452,18445,18438,18431,18424,18417,18417],"y":[12.5042081469725,7.69489732121387,4.80931082575867,3.84744866060693,1.92372433030347,1.92372433030347,0.961862165151734,0.961862165151734,0.961862165151734,0.961862165151734,0.961862165151734,0.961862165151734,0.961862165151734,0.961862165151734,0.961862165151734,0,14.427932477276,13.4660703121243,10.5804838166691,10.5804838166691,8.6567594863656,8.6567594863656,8.6567594863656,8.6567594863656,9.61862165151734,10.5804838166691,10.5804838166691,12.5042081469725,14.427932477276,17.3135189727312,23.0846919636416,29.8177271197037,12.5042081469725],"text":["lower: 12.50<br />upper: 29.8<br />date: 2020-06-04","lower:  7.69<br />upper: 23.1<br />date: 2020-06-11","lower:  4.81<br />upper: 17.3<br />date: 2020-06-18","lower:  3.85<br />upper: 14.4<br />date: 2020-06-25","lower:  1.92<br />upper: 12.5<br />date: 2020-07-02","lower:  1.92<br />upper: 10.6<br />date: 2020-07-09","lower:  0.96<br />upper: 10.6<br />date: 2020-07-16","lower:  0.96<br />upper:  9.6<br />date: 2020-07-23","lower:  0.96<br />upper:  8.7<br />date: 2020-07-30","lower:  0.96<br />upper:  8.7<br />date: 2020-08-06","lower:  0.96<br />upper:  8.7<br />date: 2020-08-13","lower:  0.96<br />upper:  8.7<br />date: 2020-08-20","lower:  0.96<br />upper: 10.6<br />date: 2020-08-27","lower:  0.96<br />upper: 10.6<br />date: 2020-09-03","lower:  0.96<br />upper: 13.5<br />date: 2020-09-10","lower:  0.00<br />upper: 14.4<br />date: 2020-09-17","lower:  0.00<br />upper: 14.4<br />date: 2020-09-17","lower:  0.96<br />upper: 13.5<br />date: 2020-09-10","lower:  0.96<br />upper: 10.6<br />date: 2020-09-03","lower:  0.96<br />upper: 10.6<br />date: 2020-08-27","lower:  0.96<br />upper:  8.7<br />date: 2020-08-20","lower:  0.96<br />upper:  8.7<br />date: 2020-08-13","lower:  0.96<br />upper:  8.7<br />date: 2020-08-06","lower:  0.96<br />upper:  8.7<br />date: 2020-07-30","lower:  0.96<br />upper:  9.6<br />date: 2020-07-23","lower:  0.96<br />upper: 10.6<br />date: 2020-07-16","lower:  1.92<br />upper: 10.6<br />date: 2020-07-09","lower:  1.92<br />upper: 12.5<br />date: 2020-07-02","lower:  3.85<br />upper: 14.4<br />date: 2020-06-25","lower:  4.81<br />upper: 17.3<br />date: 2020-06-18","lower:  7.69<br />upper: 23.1<br />date: 2020-06-11","lower: 12.50<br />upper: 29.8<br />date: 2020-06-04","lower: 12.50<br />upper: 29.8<br />date: 2020-06-04"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(0,104,139,0.2941)","hoveron":"points","name":"60% CI","legendgroup":"60% CI","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[18417,18424,18431,18438,18445,18452,18459,18466,18473,18480,18487,18494,18501,18508,18515,18522,18522,18522,18515,18508,18501,18494,18487,18480,18473,18466,18459,18452,18445,18438,18431,18424,18417,18417],"y":[16.3516568075795,10.5804838166691,6.73303515606214,5.7711729909104,3.84744866060693,3.84744866060693,2.8855864954552,2.8855864954552,1.92372433030347,1.92372433030347,1.92372433030347,1.92372433030347,2.8855864954552,1.92372433030347,1.92372433030347,1.92372433030347,1.92372433030347,7.69489732121387,7.69489732121387,6.73303515606214,6.73303515606214,5.7711729909104,5.7711729909104,5.7711729909104,5.7711729909104,6.73303515606214,6.73303515606214,7.69489732121387,8.6567594863656,10.5804838166691,12.5042081469725,18.2753811378829,24.0465541287933,16.3516568075795],"text":["lower: 16.35<br />upper: 24.0<br />date: 2020-06-04","lower: 10.58<br />upper: 18.3<br />date: 2020-06-11","lower:  6.73<br />upper: 12.5<br />date: 2020-06-18","lower:  5.77<br />upper: 10.6<br />date: 2020-06-25","lower:  3.85<br />upper:  8.7<br />date: 2020-07-02","lower:  3.85<br />upper:  7.7<br />date: 2020-07-09","lower:  2.89<br />upper:  6.7<br />date: 2020-07-16","lower:  2.89<br />upper:  6.7<br />date: 2020-07-23","lower:  1.92<br />upper:  5.8<br />date: 2020-07-30","lower:  1.92<br />upper:  5.8<br />date: 2020-08-06","lower:  1.92<br />upper:  5.8<br />date: 2020-08-13","lower:  1.92<br />upper:  5.8<br />date: 2020-08-20","lower:  2.89<br />upper:  6.7<br />date: 2020-08-27","lower:  1.92<br />upper:  6.7<br />date: 2020-09-03","lower:  1.92<br />upper:  7.7<br />date: 2020-09-10","lower:  1.92<br />upper:  7.7<br />date: 2020-09-17","lower:  1.92<br />upper:  7.7<br />date: 2020-09-17","lower:  1.92<br />upper:  7.7<br />date: 2020-09-17","lower:  1.92<br />upper:  7.7<br />date: 2020-09-10","lower:  1.92<br />upper:  6.7<br />date: 2020-09-03","lower:  2.89<br />upper:  6.7<br />date: 2020-08-27","lower:  1.92<br />upper:  5.8<br />date: 2020-08-20","lower:  1.92<br />upper:  5.8<br />date: 2020-08-13","lower:  1.92<br />upper:  5.8<br />date: 2020-08-06","lower:  1.92<br />upper:  5.8<br />date: 2020-07-30","lower:  2.89<br />upper:  6.7<br />date: 2020-07-23","lower:  2.89<br />upper:  6.7<br />date: 2020-07-16","lower:  3.85<br />upper:  7.7<br />date: 2020-07-09","lower:  3.85<br />upper:  8.7<br />date: 2020-07-02","lower:  5.77<br />upper: 10.6<br />date: 2020-06-25","lower:  6.73<br />upper: 12.5<br />date: 2020-06-18","lower: 10.58<br />upper: 18.3<br />date: 2020-06-11","lower: 16.35<br />upper: 24.0<br />date: 2020-06-04","lower: 16.35<br />upper: 24.0<br />date: 2020-06-04"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(0,104,139,0.451)","hoveron":"points","name":"30% CI","legendgroup":"30% CI","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"orientation":"v","width":[6.30000000000291,6.30000000000291,6.30000000000291,6.30000000000291,6.30000000000291,6.30000000000291,6.30000000000291,6.30000000000291,6.30000000000291,6.30000000000291,6.30000000000291,6.30000000000291,6.30000000000291],"base":[0,0,0,0,0,0,0,0,0,0,0,0,0],"x":[18417,18424,18431,18438,18445,18452,18459,18466,18473,18480,18487,18494,18501],"y":[7.69489732121387,12.5042081469725,6.73303515606214,5.7711729909104,1.92372433030347,5.7711729909104,4.80931082575867,2.8855864954552,6.73303515606214,6.73303515606214,0.961862165151734,1.92372433030347,9.61862165151734],"text":["date: 2020-06-04<br />Cases_week:  7.69","date: 2020-06-11<br />Cases_week: 12.50","date: 2020-06-18<br />Cases_week:  6.73","date: 2020-06-25<br />Cases_week:  5.77","date: 2020-07-02<br />Cases_week:  1.92","date: 2020-07-09<br />Cases_week:  5.77","date: 2020-07-16<br />Cases_week:  4.81","date: 2020-07-23<br />Cases_week:  2.89","date: 2020-07-30<br />Cases_week:  6.73","date: 2020-08-06<br />Cases_week:  6.73","date: 2020-08-13<br />Cases_week:  0.96","date: 2020-08-20<br />Cases_week:  1.92","date: 2020-08-27<br />Cases_week:  9.62"],"type":"bar","marker":{"autocolorscale":false,"color":"rgba(139,62,47,0.7)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"Observed","legendgroup":"Observed","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[18501,18501],"y":[0,82.5],"text":"","type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)","dash":"dot"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":25,"r":0,"b":60,"l":50,"pad":0,"autoexpand":false},"plot_bgcolor":"rgba(255,255,255,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[18408.4425,18527.4075],"tickmode":"array","ticktext":[" 8 Jun","22 Jun"," 6 Jul","20 Jul"," 3 Aug","17 Aug","31 Aug","14 Sep"],"tickvals":[18421,18435,18449,18463,18477,18491,18505,18519],"categoryorder":"array","categoryarray":[" 8 Jun","22 Jun"," 6 Jul","20 Jul"," 3 Aug","17 Aug","31 Aug","14 Sep"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":15.9402241594022},"tickangle":-45,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":"","hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0,82.5],"tickmode":"array","ticktext":["0","20","40","60","80"],"tickvals":[0,20,40,60,80],"categoryorder":"array","categoryarray":["0","20","40","60","80"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":15.9402241594022},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":"","hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":"transparent","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1},{"type":"rect","fillcolor":"rgba(217,217,217,1)","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":23.37899543379,"yanchor":1,"ysizemode":"pixel"}],"annotations":[{"text":"Lichfield","x":0.5,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(26,26,26,1)","family":"","size":11.689497716895},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"center","yanchor":"bottom"}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"y":1,"title":{"text":"Weekly Cases per 100k"},"x":0},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"a2dd3f2046f8":{"ymin":{},"ymax":{},"fill":{},"x":{},"type":"scatter"},"a2dd4e5ff548":{"fill":{},"x":{},"y":{}},"a2dd78c8bff7":{"xintercept":{}}},"cur_data":"a2dd3f2046f8","visdat":{"a2dd3f2046f8":["function (y) ","x"],"a2dd4e5ff548":["function (y) ","x"],"a2dd78c8bff7":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<blockquote>
+<p>Weekly reported cases per 100,000 population; Red bars: reported cases in a given week; Bands: Fitted/predicted value in the model; Vertical line: last day of data included in the model (2020-08-27).</p>
+</blockquote>
+</div>
+</div>
+<div id="row-2" class="section level2">
+<h2>Row</h2>
+<div id="about" class="section level3">
+<h3>About</h3>
+<p>Authors: Swapnil Mishra<sup>1</sup>, Jamie Scott<sup>2</sup>, Harrison Zhu<sup>2</sup>, Neil Ferguson<sup>1</sup>, Samir Bhatt<sup>1</sup>, Seth Flaxman<sup>2</sup>, Axel Gandy<sup>2</sup></p>
+<ul>
+<li><sup>1</sup>MRC Centre for Global Infectious Disease Analysis, Jameel Institute for Disease and Emergency Analytics, Imperial College London</li>
+<li><sup>2</sup>Department of Mathematics, Imperial College London</li>
+<li>Correspondence to <a href="mailto:a.gandy@imperial.ac.uk">a.gandy@imperial.ac.uk</a></li>
+</ul>
+<p>Website Development: Aided by Fabian Valka</p>
+<p>The results on this page have been computed using <a href="https://imperialcollegelondon.github.io/epidemia/index.html">epidemia</a>.</p>
+<p>Last day of data included in the model: 2020-08-27.</p>
+<p>The model was fitted on Tue Sep 1 00:00:48 2020 (UTC).</p>
+</div>
+</div>
+
+</div>
+
+<script>
+
+$(document).ready(function () {
+
+  // add bootstrap table styles to pandoc tables
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+
+  // initialize mathjax
+  var script = document.createElement("script");
+  script.type = "text/javascript";
+  script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+  document.getElementsByTagName("head")[0].appendChild(script);
+
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function () {
+  FlexDashboard.init({
+    theme: "cosmo",
+    fillPage: false,
+    orientation: "rows",
+    storyboard: false,
+    defaultFigWidth: 576,
+    defaultFigHeight: 460,
+    defaultFigWidthMobile: 360,
+    defaultFigHeightMobile: 460,
+    resize_reload: false
+  });
+});
+</script>
+
+</body>
+</html>
