@@ -47,7 +47,7 @@ function configure_choropleth_map_evented(map, layers, config) {
                           ${feature.properties.description}:<br> 
                           ${feature.properties.valueFormatted} ${ci_text}
                           <br><br>
-                            <a href='${config.link_folder}/${link_filename}.html'>Details</a>
+                            <a target='_blank' href='${config.link_folder}/${link_filename}.html'>Details</a>
                             `);
                             
         layer.bindTooltip(feature.properties.name);
@@ -127,8 +127,7 @@ function configure_choropleth_map_evented(map, layers, config) {
   }
   
   L.control.layers(timeline_control, null, { collapsed: false }).addTo(map);
-  
-  timelineControl.setTime(timelineControl.end);
+  timelineControl.setTime(new Date(config.initial_timeline_setting));
   
   title_box.setText(default_timeline.description);
   map.on('baselayerchange', function(e) {

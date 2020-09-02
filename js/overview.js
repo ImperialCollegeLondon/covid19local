@@ -1,4 +1,6 @@
 $( document ).ready(function() {
+  setTimeout(function(){ window.scrollTo(0, 0); }, 1500);
+  
   $("#Cweek2").addClass("cases_button_active");
   
   $('.navbar').on('click', 'a', function(e) {
