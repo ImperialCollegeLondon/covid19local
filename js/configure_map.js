@@ -65,21 +65,28 @@ function configure_choropleth_map_evented(map, layers, config) {
   let timeline_layers = {};
   let timeline_control = {};
   let default_timeline;
-  const title_box = L.control.textbox("Test1", "h1", { position: 'topleft' }).addTo(map);
-  const sub_title_box = L.control.textbox("Test2", "h2", { position: 'topleft' }).addTo(map);
+  const title_box = L.control.textbox("Loading map", "h1", { position: 'topleft' }).addTo(map);
+  const sub_title_box = L.control.textbox("", "h2", { position: 'topleft' }).addTo(map);
   const observation_prediction_box = L.control.textbox("Observations", "h2", { position: 'bottomright' }).addTo(map);
   
   for (var layer of layers) {
-    console.log(`Adding ${layer.varname} to map`);
-    console.log(layer);
-    let timeline = L.timeline(window[layer.varname], timeline_settings);
+    let timeline;
+    
+    if(layer.show_timeline[0]) {
+       timeline = L.timeline(window[layer.varname], timeline_settings)
+    } else {
+       timeline = L.geoJSON(window[layer.varname], timeline_settings)
+    }
+    
     timeline.description = layer.description;
     timeline.varname = layer.varname;
+    timeline.show_timeline = layer.show_timeline[0];
     timeline.show_observation_label = layer.show_observation_label[0];
     
     let timeline_group = L.layerGroup([timeline]);
     timeline_group.varname = layer.varname;
     timeline_group.description = layer.description;
+    timeline_group.show_timeline = layer.show_timeline[0];
     timeline_group.show_observation_label = layer.show_observation_label[0];
     timeline_layers[layer.varname] = timeline_group;
     timeline_control[layer.display_name] = timeline_group;
@@ -89,31 +96,34 @@ function configure_choropleth_map_evented(map, layers, config) {
       default_timeline = timeline;
     }
     
-    timeline.on('change', function(e) {
-      let week_start;
-      for (let i = 0; i < e.target.times.length - 1; i++) {
-        let time = e.target.times[i];
-        if(time <= e.target.time) {
-          week_start = time;
+    if(layer.show_timeline[0]) {
+      timeline.on('change', function(e) {
+        let week_start;
+        for (let i = 0; i < e.target.times.length - 1; i++) {
+          let time = e.target.times[i];
+          if(time <= e.target.time) {
+            week_start = time;
+            last_time = time;
+          }
         }
-      }
+        
+        const week_start_date = new Date(week_start);
+        const week_end_date = new Date(week_start);
+        week_end_date.setDate(week_start_date.getDate() + 6); 
+        
+        const start_text = week_start_date.toLocaleDateString('en-GB');
+        const end_text = week_end_date.toLocaleDateString('en-GB');
+        sub_title_box.setText(`${start_text} - ${end_text}`);
+        
+        if(week_end_date > new Date(config.obsend)) {
+          observation_prediction_box.setText('Prediction');
+        } else {
+          observation_prediction_box.setText('Observation');
+        }
+      });
       
-      const week_start_date = new Date(week_start);
-      const week_end_date = new Date(week_start);
-      week_end_date.setDate(week_start_date.getDate() + 6); 
-      
-      const start_text = week_start_date.toLocaleDateString('en-GB');
-      const end_text = week_end_date.toLocaleDateString('en-GB');
-      sub_title_box.setText(`${start_text} - ${end_text}`);
-      
-      if(week_end_date > new Date(config.obsend)) {
-        observation_prediction_box.setText('Prediction');
-      } else {
-        observation_prediction_box.setText('Observation');
-      }
-    });
-    
-    timelineControl.addTimelines(timeline);
+      timelineControl.addTimelines(timeline);
+    }
   }
   
   L.control.layers(timeline_control, null, { collapsed: false }).addTo(map);
@@ -133,9 +143,17 @@ function configure_choropleth_map_evented(map, layers, config) {
     title_box.setText(layer.description);
     
     observation_prediction_box.setVisible(layer.show_observation_label);
+    
+    if(layer.show_timeline) {
+      timelineControl.setTime(map._current_time);
+      map.addControl(timelineControl);
+      timelineControl.setTime(map._current_time);
+    } else {
+      map._current_time = timelineControl.time;
+      map.removeControl(timelineControl);
+    }
   });
   
-  console.log("Adding default legend");
   remove_all_legends(map);
   const default_legend = map.controls.get(default_timeline.varname);
   map.addControl(default_legend);
