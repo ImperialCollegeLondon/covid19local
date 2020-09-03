@@ -5,19 +5,15 @@ $(function() {
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="limitationsModalLabel">Limitations</h4>
+        <h4 class="modal-title" id="limitationsModalLabel">COVID-19 local predictions for England and Wales</h4>
       </div>
       <div class="modal-body">
         <ul>
-          <li> Predictions on this page assume  no interventions (lockdowns, school closures, and others) in the local area beyond those already taken about a week before the end of observations. 
+         <li> This site give estimates of the reproduction number of COVID-19 and predictions of cases by Local Authority in England and Wales area based on testing data and mortality data.
+         <li> All estimates and predictions have uncertainty/probability measures associated with them. Central estimates should be treated cautiously: look at the range.
+          <li> Predictions of cases assume that <strong>interventions (lockdowns, school closures, and others) do not change</strong> from about a week before the end of observations to the end of the prediction period.
           <li>
-            An increase in  cases in an area can be due to an increase in testing. The model currently does not account for this. 
-          </li>
-          <li>
-            Each region (Local authority) is treated independently, i.e., epidemic in a region is neither affected by nor affects any other region.
-          </li>
-          <li>
-            The population within a local authority is considered to be homogeneous, i.e., all individuals are considered equally likely to be affected by the disease progression.
+            An increase in cases in an area can be due to an increase in testing. The model currently does not account for this.
           </li>
         </ul>
       </div>
