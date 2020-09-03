@@ -67,7 +67,7 @@ function configure_choropleth_map_evented(map, layers, config) {
   let default_timeline;
   const title_box = L.control.textbox("Loading map", "h1", { position: 'topleft' }).addTo(map);
   const sub_title_box = L.control.textbox("", "h2", { position: 'topleft' }).addTo(map);
-  const observation_prediction_box = L.control.textbox("Observations", "h2", { position: 'bottomright' }).addTo(map);
+  const observation_prediction_box = L.control.textbox("", "h2", { position: 'bottomright' }).addTo(map);
   
   for (var layer of layers) {
     let timeline;
@@ -116,9 +116,9 @@ function configure_choropleth_map_evented(map, layers, config) {
         sub_title_box.setText(`${start_text} - ${end_text}`);
         
         if(week_end_date > new Date(config.obsend)) {
-          observation_prediction_box.setText('Prediction');
+          observation_prediction_box.setText('Projected');
         } else {
-          observation_prediction_box.setText('Observation');
+          observation_prediction_box.setText('Reported');
         }
       });
       
