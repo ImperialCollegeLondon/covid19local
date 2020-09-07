@@ -47,7 +47,7 @@ function configure_choropleth_map_evented(map, layers, config) {
                           ${feature.properties.description}:<br> 
                           ${feature.properties.valueFormatted} ${ci_text}
                           <br><br>
-                            <a target='_blank' href='${config.link_folder}/${link_filename}.html'>Details</a>
+                            <a target='_blank' href="${config.link_folder}/${link_filename}.html">Details</a>
                             `);
                             
         layer.bindTooltip(feature.properties.name);
