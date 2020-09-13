@@ -13,6 +13,9 @@ $(function() {
       return item.item.name;
     });
     
+    var _paq = window._paq = window._paq || [];
+    _paq.push(['trackSiteSearch', query, "Area", result.length]);
+    
     callback(result);
   };
   
@@ -35,6 +38,10 @@ $(function() {
     } else {
       nav_target = `${link_folder}/${link_filename}.html`;
     }
+    
+    var _paq = window._paq = window._paq || [];
+    _paq.push(['trackEvent', 'Navigation', 'SearchBox', link_filename]);
+    
     window.location.href = nav_target;
   });
 });
