@@ -11,8 +11,7 @@ $( document ).ready(function() {
   
   loadRegions();
   
-  setTimeout(subPageAnalytics(), 6000);
-  console.log($("#navbar"));
+  subPageAnalytics();
   
   regionFilterAnalytics();
  
