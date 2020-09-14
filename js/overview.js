@@ -15,7 +15,8 @@ $( document ).ready(function() {
   console.log($("#navbar"));
   
   regionFilterAnalytics();
-  
+ 
+  linkSharingButton('#table-sharing-btn');
 });
 
 function showCases(target_id) {
@@ -36,12 +37,19 @@ function topFunction() {
 }
 
 function loadRegions() {
+  var _paq = window._paq = window._paq || [];
   let urlParams = new URLSearchParams(window.location.search);
   let regions = urlParams.getAll('region');
   
-  if (regions && regions.length) {
-    $("#region-select select")[0].selectize.setValue(regions);
-    regions.map(region => _paq.push(['trackEvent', 'Region', 'QueryParam', region]));
+  try {
+    if (regions && regions.length) {
+      $("#region-select select")[0].selectize.setValue(regions);
+      regions.map(region => _paq.push(['trackEvent', 'Region', 'QueryParam', region]));
+    }
+  } 
+  catch(err) {
+    console.log("Invalid region list supplied in query param");  
+    regions.map(region => _paq.push(['trackEvent', 'Region', 'QueryParamError', region]));
   }
 }
 
@@ -80,5 +88,29 @@ function regionFilterAnalytics() {
   $("#region-select select")[0].selectize.on('item_remove', function(value, item) {
     var _paq = window._paq = window._paq || [];
     _paq.push(['trackEvent', 'Region', 'ItemRemove', value]);
+  });
+}
+
+function linkSharingButton(button_id) {
+  new ClipboardJS(button_id, {
+    text: function(trigger) {
+      var _paq = window._paq = window._paq || [];
+      const regions = $("#region-select select")[0].selectize.getValue();
+      const params = new URLSearchParams();
+      regions.map(region => params.append('region', region));
+      
+      const target_url = `https://imperialcollegelondon.github.io/covid19local/?${params.toString()}#table`;
+      
+      $(button_id).tooltip('show');
+      setTimeout(function(){ $(button_id).tooltip('hide'); }, 2000);
+      _paq.push(['trackEvent', 'Region', 'CopyLink', regions.toString()]);
+      
+      return target_url;
+    }
+  });
+  
+  $(button_id).tooltip({
+    "trigger": "manual",
+    "delay": { "show": 200, "hide": 200 }
   });
 }
