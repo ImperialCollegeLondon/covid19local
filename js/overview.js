@@ -29,6 +29,12 @@ function showCases(target_id) {
   window.dispatchEvent(new Event('resize'));
 }
 
+function disclaimerDismiss() {
+  var _paq = window._paq = window._paq || [];
+  _paq.push(['trackEvent', 'Disclaimer', 'Dismiss', true]);
+  topFunction();
+}
+
 // When the user clicks on the button, scroll to the top of the document
 function topFunction() {
   document.body.scrollTop = 0; // For Safari
@@ -63,8 +69,9 @@ function subPageAnalytics() {
         let page = $( this ).text();
         this.addEventListener('click', function() {
               var _paq = window._paq = window._paq || [];
+              _paq.push(['trackEvent', 'Navigation', 'Navbar', page]);
               _paq.push(['setReferrerUrl', currentUrl]);
-               currentUrl = '/' + page;
+               currentUrl = '/covid19local/' + page;
               _paq.push(['setCustomUrl', currentUrl]);
               _paq.push(['deleteCustomVariables', 'page']); 
               _paq.push(['setGenerationTimeMs', 0]);
