@@ -15,7 +15,7 @@ $(function() {
           <li>
             An increase in cases in an area can be due to an increase in testing. The model currently does not account for this.
           </li>
-          <li> A statistical model is used to estimate qunatities that cannot be directly measures, such as the reproduction number R. No model is perfect; see <strong>limitations</strong> in "Details".
+          <li> A statistical model is used to estimate quantities that cannot be directly measures, such as the reproduction number R. No model is perfect; see <strong>limitations</strong> in "Details".
           </li>
         </ul>
       </div>
