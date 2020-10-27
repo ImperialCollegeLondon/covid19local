@@ -38,7 +38,8 @@ function configure_choropleth_map_evented(map, layers, config) {
         let link_filename = feature.properties.name.replace(/ /g,"_");
         let ci_text = "";
         
-        if(feature.properties.CILow && feature.properties.CIUp) {
+        if(feature.properties.CILow && feature.properties.CIUp && 
+           feature.properties.CILow != "NA" && feature.properties.CIUp != "NA") {
           ci_text = `(${feature.properties.CILow} - ${feature.properties.CIUp} 90% CI)`;
         }
 
