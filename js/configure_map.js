@@ -149,10 +149,14 @@ function configure_choropleth_map_evented(map, layers, config) {
       map.addControl(timelineControl);
       timelineControl.setTime(map._current_time);
     } else {
-      let title_date = new Date(window[layer.varname].features[0].properties.end);
-      title_date.setDate(title_date.getDate() -1)
-      let title_text = title_date.toLocaleDateString('en-GB');
-      sub_title_box.setText(title_text);
+      let week_start_date = new Date(window[layer.varname].features[0].properties.start);
+      let week_end_date = new Date(window[layer.varname].features[0].properties.end);
+      week_end_date.setDate(week_end_date.getDate() - 0.5)
+      
+      const start_text = week_start_date.toLocaleDateString('en-GB');
+      const end_text = week_end_date.toLocaleDateString('en-GB');
+      sub_title_box.setText(`${start_text} - ${end_text}`);
+      
       map._current_time = timelineControl.time;
       map.removeControl(timelineControl);
     }
