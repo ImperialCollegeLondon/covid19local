@@ -1,3 +1,82 @@
+rflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript */
+function formatNumber(x) {
+  var parts = x.toString().split(".");
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return parts.join(".");
+}
+
+/**  Get style  */
+function getStyle(oElm, strCssRule) {
+  var strValue = "";
+  if (document.defaultView && document.defaultView.getComputedStyle) {
+    strValue = document.defaultView.getComputedStyle(oElm, "").getPropertyValue(strCssRule);
+  } else if (oElm.currentStyle) {
+    strCssRule = strCssRule.replace(/\-(\w)/g, function(strMatch, p1) {
+      return p1.toUpperCase();
+    });
+    strValue = oElm.currentStyle[strCssRule];
+  }
+  return strValue;
+}
+
+/**  Create Element NS Ready  */
+function onCreateElementNsReady(func) {
+  if (document.createElementNS !== undefined) {
+    func();
+  } else {
+    setTimeout(function() {
+      onCreateElementNsReady(func);
+    }, 100);
+  }
+}
+
+/**  Get IE version  */
+// ----------------------------------------------------------
+// A short snippet for detecting versions of IE in JavaScript
+// without resorting to user-agent sniffing
+// ----------------------------------------------------------
+// If you're not in IE (or IE version is less than 5) then:
+// ie === undefined
+// If you're in IE (>=5) then you can determine which version:
+// ie === 7; // IE7
+// Thus, to detect IE:
+// if (ie) {}
+// And to detect the version:
+// ie === 6 // IE6
+// ie > 7 // IE8, IE9 ...
+// ie < 9 // Anything less than IE9
+// ----------------------------------------------------------
+// UPDATE: Now using Live NodeList idea from @jdalton
+var ie = (function() {
+
+  var undef,
+    v = 3,
+    div = document.createElement('div'),
+    all = div.getElementsByTagName('i');
+
+  while (
+    div.innerHTML = '<!--[if gt IE ' + (++v) + ']><i></i><![endif]-->',
+    all[0]
+  );
+  return v > 4 ? v : undef;
+}());
+
+// extend target object with second object
+function extend(out) {
+  out = out || {};
+
+  for (var i = 1; i < arguments.length; i++) {
+    if (!arguments[i])
+      continue;
+
+    for (var key in arguments[i]) {
+      if (arguments[i].hasOwnProperty(key))
+        out[key] = arguments[i][key];
+    }
+  }
+
+  return out;
+};
 /**
  * JustGage - animated gauges using RaphaelJS
  * Check http://www.justgage.com for official releases
