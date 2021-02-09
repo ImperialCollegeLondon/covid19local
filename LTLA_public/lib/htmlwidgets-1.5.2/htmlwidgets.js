@@ -1,22 +1,3 @@
-enderValue: function(el, x, instance) {
-        return instance.renderValue(x);
-      },
-      resize: function(el, width, height, instance) {
-        return instance.resize(width, height);
-      }
-    };
-
-    if (defn.find)
-      result.find = defn.find;
-    if (defn.renderError)
-      result.renderError = defn.renderError;
-    if (defn.clearError)
-      result.clearError = defn.clearError;
-
-    return result;
-  }
-})();
-
 (function() {
   // If window.HTMLWidgets is already defined, then use it; otherwise create a
   // new object. This allows preceding code to set options that affect the
